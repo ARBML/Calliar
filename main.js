@@ -49,7 +49,7 @@ async function start(cur_mode) {
 
     canvas.renderAll();
     
-    addImage('0.jpg')
+    addImage('https://www.namearabic.com/thumbs/Thuluth/Aysha-462-400.jpg')
 
     //setup listeners 
     canvas.on('mouse:up', function(e) {
@@ -75,6 +75,15 @@ async function start(cur_mode) {
 
 function save() {
     console.log(currSketch)
+
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", 'http://127.0.0.1:8000/endpoint/', true);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    // xhr.setRequestHeader('Access-Control-Allow-Origin', '*');
+    xhr.send(JSON.stringify({
+        value: currSketch
+    }));
+    
     currStroke = []
     currSketch = []
 }
