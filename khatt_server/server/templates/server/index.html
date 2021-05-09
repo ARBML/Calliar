@@ -20,7 +20,9 @@
 	
 <!-- canvas script -->
 <script src="{% static 'fabric.js' %}"></script>
-	
+
+<script src="{% static 'unicode.js' %}"></script>
+
 <!-- main script -->
 <script src="{% static 'main.js' %}" > </script>
 
@@ -37,19 +39,19 @@
     <div class="col-md-3" style ='margin-left:100px;'>  
       <canvas id="canvas" width="500" height="500" class="canvas" style="border:1px solid #b9bfc9;margin-top:25px;"></canvas>
       <div class = "row form-group">
-        <div class="col-md-6" style="margin-top:50px;">
+        <div class="col-md-8" style="margin-top:50px;">
           <input type="text" class = "form-control" id="text" value=""  dir="rtl" > 
         </div>
         <div class="col-md-4" style="margin-top:60px;">
           <input type="range" min="1" max="10" value="5" class="slider" id="myRange"> 
         </div>
-        <div class="col-md-1" style="margin-top:55px;">
+        <!-- <div class="col-md-1" style="margin-top:55px;">
           <span class="label label-default" id = "x"></span>
         </div>
 
         <div class="col-md-1" style="margin-top:55px;">
           <span class="label label-default" id = "y"></span>
-        </div>
+        </div> -->
  
       </div>
     </div>

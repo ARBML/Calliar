@@ -6,6 +6,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
 import numpy as np
 import os
+from random import shuffle
 
 @method_decorator(csrf_exempt, name='dispatch')
 class EndpointView(View):
@@ -38,7 +39,9 @@ class NextImageView(View):
     def get_next_image_name(self):
         uploaded_images_paths = os.listdir('server/data')
         uploaded_images_names = [image_path.split('.')[0] for image_path in uploaded_images_paths]
-        for image_path in os.listdir('server/static/images/'):
+        image_paths = os.listdir('server/static/images/')
+        shuffle(image_paths)
+        for image_path in image_paths:
             image_name = image_path.split('.')[0]
             if image_name not in uploaded_images_names:
                 return image_path

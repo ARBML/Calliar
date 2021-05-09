@@ -7,7 +7,7 @@ var mousePressed = false;
 var curr_img;
 var currStroke = [];
 var currSketch = [];
-const colors = ['black', 'red', 'blue', 'green', 'yellow', 'pink', 'purple']
+const colors = ['black', 'red', 'blue', 'green', 'orange', 'brown', 'purple']
 var imageName;
 /*
 record the current drawing coordinates
@@ -16,15 +16,43 @@ function recordCoor(event) {
     var pointer = canvas.getPointer(event.e);
     var x = pointer.x;
     var y = pointer.y;
-    console.log(x)
-    document.getElementById("x").innerHTML =""+x;
-    document.getElementById("y").innerHTML =""+y;
+    // console.log(x)
+    // document.getElementById("x").innerHTML =""+x;
+    // document.getElementById("y").innerHTML =""+y;
 
     if (x >= 0 && y >= 0 && mousePressed) {
         currStroke.push([x, y])
     }
 }
 
+function preprocess(name)
+{
+    var text = name;
+    const diacritics = "[ًٌٍَُِّْ]"
+    for (i = 0; i < diacritics.length; i++) 
+    {
+        text = text.replace(diacritics[i], '')
+    }
+
+    var outText = ""
+    for (i = 0; i < text.length; i++) 
+    {
+        if (text[i] in map_chars)
+            if (text[i] == "\u0643" && i != text.length - 1)
+                outText += text[i]+'ـ'
+            else
+                outText += map_chars[text[i]].join(" ")
+        else{
+
+                outText += text[i]
+        }            
+        if (i != text.length - 1)
+            outText +=  " ، "
+            
+    }
+
+    return [text, outText]
+}
 function addImage(imageName)
 {
     fabric.Image.fromURL("/static/images/"+imageName, function(img) {
@@ -37,7 +65,9 @@ function addImage(imageName)
         img.scaleToWidth(500);
         curr_img = img
         canvas.add(curr_img)
-        const text =(imageName.split("_")[1]).split('.')[0]
+        console.log(map_chars['أ'])
+        var text =(imageName.split("_")[1]).split('.')[0]
+        text = preprocess(text)[1]
         document.getElementById("text").value  = text;
     });
 }
