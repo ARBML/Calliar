@@ -1,13 +1,3 @@
 khatt_server/server/static/images/*
 khatt_server/server/data/*
-khatt_server/khatt_server/__pycache__/settings.cpython-38.pyc
-khatt_server/khatt_server/__pycache__/urls.cpython-38.pyc
-khatt_server/khatt_server/__pycache__/__init__.cpython-38.pyc
-khatt_server/khatt_server/__pycache__/wsgi.cpython-38.pyc
-khatt_server/server/__pycache__/__init__.cpython-38.pyc
-khatt_server/server/__pycache__/admin.cpython-38.pyc
-khatt_server/server/__pycache__/apps.cpython-38.pyc
-khatt_server/server/__pycache__/models.cpython-38.pyc
-khatt_server/server/__pycache__/urls.cpython-38.pyc
-khatt_server/server/__pycache__/views.cpython-38.pyc
-khatt_server/server/migrations/__pycache__/__init__.cpython-38.pyc
+*.pyc

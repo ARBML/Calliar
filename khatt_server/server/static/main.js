@@ -9,6 +9,8 @@ var currStroke = [];
 var currSketch = [];
 const colors = ['black', 'red', 'blue', 'green', 'orange', 'brown', 'purple']
 var imageName;
+var input;
+
 /*
 record the current drawing coordinates
 */
@@ -47,7 +49,7 @@ function preprocess(name)
                 outText += text[i]
         }            
         if (i != text.length - 1)
-            outText +=  " ، "
+            outText +=  " "
             
     }
 
@@ -68,7 +70,7 @@ function addImage(imageName)
         console.log(map_chars['أ'])
         var text =(imageName.split("_")[1]).split('.')[0]
         text = preprocess(text)[1]
-        document.getElementById("text").value  = text;
+        input.value  = text;
     });
 }
 /*
@@ -102,6 +104,9 @@ async function start() {
         mousePressed = false
         currSketch.push(currStroke)
         canvas.freeDrawingBrush.color = colors[currSketch.length % colors.length];
+        console.log(currSketch.length)
+        input.focus();
+        input.setSelectionRange(0, currSketch.length * 2);
         currStroke =[]
     });
     canvas.on('mouse:down', function(e) {
@@ -116,6 +121,9 @@ async function start() {
     slider.oninput = function() {
         canvas.freeDrawingBrush.width = this.value;
     };
+
+    input = document.getElementById("text");
+
     
 }
 
