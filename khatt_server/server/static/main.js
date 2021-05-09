@@ -16,25 +16,29 @@ function recordCoor(event) {
     var pointer = canvas.getPointer(event.e);
     var x = pointer.x;
     var y = pointer.y;
+    console.log(x)
+    document.getElementById("x").innerHTML =""+x;
+    document.getElementById("y").innerHTML =""+y;
 
-    
     if (x >= 0 && y >= 0 && mousePressed) {
         currStroke.push([x, y])
     }
 }
 
-function addImage(path)
+function addImage(imageName)
 {
-    fabric.Image.fromURL(path, function(img) {
-        img.opacity = 0.2
+    fabric.Image.fromURL("/static/images/"+imageName, function(img) {
+        img.opacity = 0.5
         img.set({
             left: 0,
-            top: 0
+            top: 0,
           });
-        img.scaleToHeight(300);
-        img.scaleToWidth(300);
+        img.scaleToHeight(500);
+        img.scaleToWidth(500);
         curr_img = img
-        canvas.add(img); 
+        canvas.add(curr_img)
+        const text =(imageName.split("_")[1]).split('.')[0]
+        document.getElementById("text").value  = text;
     });
 }
 /*
@@ -49,7 +53,7 @@ function getImageUrl(){
     return xmlHttp.responseText
 }
 
-async function start(cur_mode) {
+async function start() {
    
     canvas = new fabric.Canvas('canvas');
     canvas.backgroundColor = '#ffffff';
@@ -61,7 +65,7 @@ async function start(cur_mode) {
 
     // addImage('https://www.namearabic.com/thumbs/Thuluth/Aysha-462-400.jpg')
     imageName = getImageUrl()
-    addImage('/static/images/'+imageName)
+    addImage(imageName)
 
     //setup listeners 
     canvas.on('mouse:up', function(e) {
@@ -76,8 +80,8 @@ async function start(cur_mode) {
     canvas.on('mouse:move', function(e) {
         recordCoor(e)
     });
+
     canvas.isDrawingMode = 1;
-    $('button').prop('disabled', false);
     var slider = document.getElementById('myRange');
     slider.oninput = function() {
         canvas.freeDrawingBrush.width = this.value;
@@ -86,12 +90,9 @@ async function start(cur_mode) {
 }
 
 function save() {
-    console.log(currSketch)
-
     var xhr = new XMLHttpRequest();
     xhr.open("POST", 'http://127.0.0.1:8000/endpoint/', true);
     xhr.setRequestHeader('Content-Type', 'application/json');
-    // xhr.setRequestHeader('Access-Control-Allow-Origin', '*');
     xhr.send(JSON.stringify({
         value: currSketch,
         imageName:imageName
@@ -101,22 +102,23 @@ function save() {
     currSketch = []
 }
 
-function next() {
+function clearCanvas()
+{
     canvas.clear();
     canvas.backgroundColor = '#ffffff';
-    imageName = getImageUrl()
     currStroke = []
     currSketch = []
-    addImage('/static/images/'+imageName)
+}
+function next() {
+    clearCanvas();
+    imageName = getImageUrl()
+    addImage(imageName)
 }
 
 /*
 clear the canvs 
 */
 function erase() {
-    canvas.clear();
-    canvas.backgroundColor = '#ffffff';
+    clearCanvas();
     canvas.add(curr_img);
-    currStroke = []
-    currSketch = []
 }

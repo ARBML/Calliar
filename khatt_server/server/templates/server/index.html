@@ -29,33 +29,45 @@
 <body>
 <nav class="navbar navbar-expand-sm bg-light navbar-light">
   <!-- Brand/logo -->
-  <a class="navbar-brand" href="#"><h1>SKETCH<small>ER</small></h1></a>
+  <a class="navbar-brand" href="#"><h1>Kha<small>tt</small></h1></a>
 </nav>
 
 
-{{next_image_name}}
-
-<form method="POST">
-  {% csrf_token %}
   <div class="row">
-    <div class="col" style ='margin-left:100px;'>  
-      <canvas id="canvas" width="300" height="300" class="canvas" style="border:1px solid #b9bfc9;margin-top:25px;"></canvas>
-      <div class="btn-group" style = 'margin-top:40px; '>
-        <input type="range" min="5" max="20" value="10" class="slider" id="myRange" style ='margin-top:20px;'>
-        <button type="button" class="btn btn-outline-primary" onclick ='erase()'style ='margin-left:10px;' disabled>Clear</button>
-        <button type="button" class="btn btn-outline-primary" onclick ='save()' style ='margin-left:10px;' disabled>Save</button>
-        <button type="button" class="btn btn-outline-primary" onclick ='next()' style ='margin-left:10px;' disabled>Next</button>
-      </div>   
+    <div class="col-md-3" style ='margin-left:100px;'>  
+      <canvas id="canvas" width="500" height="500" class="canvas" style="border:1px solid #b9bfc9;margin-top:25px;"></canvas>
+      <div class = "row form-group">
+        <div class="col-md-6" style="margin-top:50px;">
+          <input type="text" class = "form-control" id="text" value=""  dir="rtl" > 
+        </div>
+        <div class="col-md-4" style="margin-top:60px;">
+          <input type="range" min="1" max="10" value="5" class="slider" id="myRange"> 
+        </div>
+        <div class="col-md-1" style="margin-top:55px;">
+          <span class="label label-default" id = "x"></span>
+        </div>
+
+        <div class="col-md-1" style="margin-top:55px;">
+          <span class="label label-default" id = "y"></span>
+        </div>
+ 
+      </div>
     </div>
+    <div class="col-md-3" style ='margin-top:25px;margin-left: 20px;'> 
+      <div class="btn-group-vertical">
+        <button type="button" class="btn btn-outline-primary" onclick ='erase()'>Clear</button>
+        <button type="button" class="btn btn-outline-primary" onclick ='save()' >Save</button>
+        <button type="button" class="btn btn-outline-primary" onclick ='next()' >Next</button>
+      </div>
+    </div> 
   </div> 
-<input type="text" id="text" value=""  dir="rtl" class="keyboardInput"> 
-<link rel="stylesheet" type="text/css" href="keyboard.css"> 
-	<script type="text/javascript" src="keyboard.js" charset="UTF-8"></script>  
-</form>
+
+
+
 </body>
 
 <script>
 	
-	start('en')
+	start()
 </script>
 </html>
