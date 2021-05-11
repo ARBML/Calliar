@@ -1,3 +1,5 @@
 khatt_server/server/static/images/*
 khatt_server/server/data/*
 *.pyc
+venv/*
+*.mp4

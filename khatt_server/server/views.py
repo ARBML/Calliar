@@ -7,6 +7,8 @@ from django.utils.decorators import method_decorator
 import numpy as np
 import os
 from random import shuffle
+from django.http import JsonResponse
+import json
 
 @method_decorator(csrf_exempt, name='dispatch')
 class EndpointView(View):
@@ -29,10 +31,15 @@ class EndpointView(View):
         return self.render_to_template()
 
     def post(self, request, *args, **kwargs):
-        data = eval(request.body)
-        np.save(f"server/data/{data['imageName'].split('.')[0]}.npy",np.array(data['value']))
-        return HttpResponse(f"Hello, data recieved successfully. Data:{data['value']}")
-
+        try:
+            data = json.loads(request.body)
+            print(data)
+            json.dump(data['sketch'],open(f"server/data/{data['sketchName'].split('.')[0]}.json", 'w'))
+            result = JsonResponse({'result':True})
+        except Exception as e:
+            print(e)
+            result = JsonResponse({'result':False})
+        return result
 
 class NextImageView(View):
 

@@ -39,9 +39,11 @@ function preprocess(name)
     var outText = ""
     for (i = 0; i < text.length; i++) 
     {
+        if (text[i] == " ")
+            continue
         if (text[i] in map_chars)
             if (text[i] == "\u0643" && i != text.length - 1)
-                outText += text[i]+'ـ'
+                outText += '\uFEDB'
             else
                 outText += map_chars[text[i]].join(" ")
         else{
@@ -67,7 +69,6 @@ function addImage(imageName)
         img.scaleToWidth(500);
         curr_img = img
         canvas.add(curr_img)
-        console.log(map_chars['أ'])
         var text =(imageName.split("_")[1]).split('.')[0]
         text = preprocess(text)[1]
         input.value  = text;
@@ -102,15 +103,16 @@ async function start() {
     //setup listeners 
     canvas.on('mouse:up', function(e) {
         mousePressed = false
-        currSketch.push(currStroke)
+        const currChar = input.value.charAt(currSketch.length * 2)
+        currSketch.push({[currChar]:currStroke})
         canvas.freeDrawingBrush.color = colors[currSketch.length % colors.length];
-        console.log(currSketch.length)
         input.focus();
         input.setSelectionRange(0, currSketch.length * 2);
         currStroke =[]
     });
     canvas.on('mouse:down', function(e) {
         mousePressed = true
+        recordCoor(e)
     });
     canvas.on('mouse:move', function(e) {
         recordCoor(e)
@@ -129,13 +131,21 @@ async function start() {
 
 function save() {
     var xhr = new XMLHttpRequest();
-    xhr.open("POST", 'http://127.0.0.1:8000/endpoint/', true);
+    xhr.open("POST", 'endpoint/', false);
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.send(JSON.stringify({
-        value: currSketch,
-        imageName:imageName
+        sketch: currSketch,
+        sketchName:imageName
     }));
-    
+    const response = JSON.parse(xhr.response)
+
+    if (response.result == true)
+    {
+        next()
+    }
+    else{
+        alert('something is wrong!')
+    }
     currStroke = []
     currSketch = []
 }

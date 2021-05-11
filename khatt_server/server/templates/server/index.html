@@ -34,31 +34,28 @@
   <a class="navbar-brand" href="#"><h1>Kha<small>tt</small></h1></a>
 </nav>
 
+  <div class="container-fluid">
+        <div class = "row justify-content-center" style="margin-top:3em;">
+          <div class = "col-3">
+            <input type="text" class = "form-control" id="text" value=""  dir="rtl" readonly> 
+          </div>
 
-  <div class="row">
-    <div class="col-md-3" style ='margin-left:100px;'>  
-      <div class = "row form-group">
-        <div class="col-md-8" style="margin-top:50px;">
-          <input type="text" class = "form-control" id="text" value=""  dir="rtl"> 
         </div>
-        <div class="col-md-4" style="margin-top:60px;">
-          <input type="range" min="1" max="10" value="5" class="slider" id="myRange"> 
+        <div class = "row justify-content-center">
+          <canvas id="canvas" width="500" height="500" class="canvas" style="border:1px solid #b9bfc9;margin-top:25px;"></canvas>
         </div>
-        <canvas id="canvas" width="500" height="500" class="canvas" style="border:1px solid #b9bfc9;margin-top:25px;"></canvas>
 
-      </div>
-    </div>
-    <div class="col-md-3" style ='margin-top:115px;margin-left: 20px;'> 
-      <div class="btn-group-vertical">
-        <button type="button" class="btn btn-outline-primary" onclick ='erase()'>Clear</button>
-        <button type="button" class="btn btn-outline-primary" onclick ='save()' >Save</button>
-        <button type="button" class="btn btn-outline-primary" onclick ='next()' >Next</button>
-      </div>
-    </div> 
-  </div> 
-
-
-
+        <div class = "row justify-content-center" style="margin-top:3em;">
+            <div class="btn-group">
+              <button type="button" class="btn btn-outline-primary" onclick ='erase()'>Clear</button>
+              <button type="button" class="btn btn-outline-primary" onclick ='save()' >Save</button>
+              <button type="button" class="btn btn-outline-primary" onclick ='next()' >Next</button>
+          </div>
+        </div>
+        <div class = "row justify-content-center" style="margin-top:3em;">
+          <input type="range" min="1" max="10" value="5" class="form-range" id="myRange"> 
+        </div>
+  </div>
 </body>
 
 <script>

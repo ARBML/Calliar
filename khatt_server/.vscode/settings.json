@@ -1,3 +1,4 @@
 {
-    "python.pythonPath": "/home/magedsaeed/.virtualenvs/khatt-server/bin/python"
+    "python.pythonPath": "/home/magedsaeed/.virtualenvs/khatt-server/bin/python",
+    "jupyter.jupyterServerType": "local"
 }
