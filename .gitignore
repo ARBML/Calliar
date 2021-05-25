@@ -1,5 +1,13 @@
 khatt_server/server/static/images/*
 khatt_server/server/data/*
+khatt_server/server/static/larger_images/*
+khatt_server/server/larger_data/*
+khatt_server/zaid-clean-2200/*
 *.pyc
 venv/*
 *.mp4
+*.jpg
+*.json
+*.png
+*.zip
+*.npz
