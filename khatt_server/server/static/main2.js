@@ -66,7 +66,12 @@ async function start() {
     addImage(imageName)
     input = document.getElementById("text");
 
-    
+    input.addEventListener("keyup", function(event) {
+        if (event.keyCode === 13) {
+         event.preventDefault();
+         document.getElementById("save").click();
+        }
+    });
 }
 
 function save() {

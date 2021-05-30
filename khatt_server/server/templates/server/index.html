@@ -35,11 +35,15 @@
 </nav>
 
   <div class="container-fluid">
-        <div class = "row justify-content-center" style="margin-top:3em;">
-          <div class = "col-3">
-            <input type="text" class = "form-control" id="text" value=""  dir="rtl" readonly> 
+        <div class = "row justify-content-center m-2" style="margin-top:3em;">
+          <div class = "col-10">
+            <input type="text" class = "form-control" id="text-readonly" value=""  dir="rtl" readonly> 
           </div>
-
+        </div>
+        <div class = "row justify-content-center m-2">
+          <div class = "col-10">
+            <input type="text" class = "form-control" id="text" value=""  dir="rtl"> 
+          </div>
         </div>
         <div class = "row justify-content-center">
           <canvas id="canvas" width="500" height="500" class="canvas" style="border:1px solid #b9bfc9;margin-top:25px;"></canvas>
@@ -49,7 +53,8 @@
             <div class="btn-group">
               <button type="button" class="btn btn-outline-primary" onclick ='erase()'>Clear</button>
               <button type="button" class="btn btn-outline-primary" onclick ='save()' >Save</button>
-              <button type="button" class="btn btn-outline-primary" onclick ='next()' >Next</button>
+              <button type="button" class="btn btn-outline-primary" onclick ='next()' >Skip</button>
+              <button type="button" class="btn btn-outline-primary" onclick ='undo()' >Undo</button>
           </div>
         </div>
         <div class = "row justify-content-center" style="margin-top:3em;">

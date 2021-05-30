@@ -31,8 +31,14 @@ class EndpointView(View):
     def post(self, request, *args, **kwargs):
         try:
             data = json.loads(request.body)
-            print(data)
-            json.dump(data['sketch'],open(f"server/data/{data['sketchName'].split('.')[0]}.json", 'w'))
+            file_name = data['sketchName'].split('.')[0]
+            cnt = 0 
+            while str(cnt)+file_name in os.listdir('server/larger_data/'):
+                cnt += 1
+                file_name = str(cnt)+file_name
+
+            file_path = f"server/larger_data/{file_name}.json"
+            json.dump(data['sketch'],open(file_path, 'w'))
             result = JsonResponse({'result':True})
         except Exception as e:
             print(e)
