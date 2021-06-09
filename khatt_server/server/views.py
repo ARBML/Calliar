@@ -27,17 +27,24 @@ class EndpointView(View):
     
     def get(self, request, *args, **kwargs):
         return self.render_to_template()
-
+        
     def post(self, request, *args, **kwargs):
         try:
             data = json.loads(request.body)
-            file_name = data['sketchName'].split('.')[0]
-            cnt = 0 
-            while str(cnt)+file_name in os.listdir('server/larger_data/'):
-                cnt += 1
-                file_name = str(cnt)+file_name
-
-            file_path = f"server/larger_data/{file_name}.json"
+            file_name = data['newImageName'].split('.')[0]
+            ctr = '' 
+            while True:
+                if ctr+file_name not in os.listdir('server/static/processed_larger_images'):
+                    shutil.move(f"server/static/larger_images/{data['oldImageName']}",
+                                f"server/static/processed_larger_images/{ctr+file_name}.jpg")
+                    break 
+                else:
+                    if ctr == '':
+                        ctr = '1'
+                    else:
+                        ctr = str(int(ctr)+1)
+            print(file_name)
+            file_path = f"server/larger_data/{ctr+file_name}.json"
             json.dump(data['sketch'],open(file_path, 'w'))
             result = JsonResponse({'result':True})
         except Exception as e:
@@ -48,15 +55,12 @@ class EndpointView(View):
 class NextImageView(View):
 
     def get_next_image_name(self):
-        print('calling here')
-        uploaded_images_paths = os.listdir('server/larger_data')
-        uploaded_images_names = [image_path.split('.')[0] for image_path in uploaded_images_paths]
+        # uploaded_images_paths = os.listdir('server/larger_data')
+        # uploaded_images_names = [image_path.split('.')[0] for image_path in uploaded_images_paths]
         image_paths = os.listdir('server/static/larger_images/')
         shuffle(image_paths)
         for image_path in image_paths:
-            image_name = image_path.split('.')[0]
-            if image_name not in uploaded_images_names:
-                return image_path
+            return JsonResponse({'image_path':image_path, 'num_images':len(image_paths)})
         return None
 
 
