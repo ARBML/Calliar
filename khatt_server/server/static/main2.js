@@ -29,7 +29,7 @@ function recordCoor(event) {
 
 function addImage(imageName)
 {
-    fabric.Image.fromURL("/static/larger_images/"+imageName, function(img) {
+    fabric.Image.fromURL("/static/images_non_annotated/"+imageName, function(img) {
         img.opacity = 0.5
         img.set({
             left: 0,
@@ -49,9 +49,10 @@ load the model
 
 function getImageUrl(){
     var xmlHttp = new XMLHttpRequest();
-    xmlHttp.open( "GET", '/endpoint/next-image', false ); // false for synchronous request
+    xmlHttp.open( "GET", '/endpoint2/next-image2', false ); // false for synchronous request
     xmlHttp.send( null );
-    return xmlHttp.responseText
+    response = JSON.parse(xmlHttp.response)
+    return response.image_path
 }
 
 async function start() {
@@ -77,7 +78,7 @@ async function start() {
 function save() {
     text = document.getElementById('text').value
     var xhr = new XMLHttpRequest();
-    xhr.open("POST", 'endpoint2/', false);
+    xhr.open("POST", 'http://172.16.100.199:8000/endpoint2/', false);
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.send(JSON.stringify({
         text: text,

@@ -11,6 +11,7 @@ const colors = ['black', 'red', 'blue', 'green', 'orange', 'brown', 'purple']
 var oldImageName;
 var newImageName;
 var numImages;
+var procNumImages;
 var readonlyInput;
 var input;
 var ctr = 0; 
@@ -116,7 +117,8 @@ function getImageUrl(){
     xmlHttp.send( null );
     response = JSON.parse(xmlHttp.response)
     numImages = response.num_images
-    document.getElementById("ctr").innerHTML = 'You processed '+ctr+ ', remaining images '+numImages;
+    procNumImages = response.proc_num_images
+    document.getElementById("ctr").innerHTML = 'You processed '+ctr+ ', remaining images '+numImages+', total processed images '+procNumImages;
     return response.image_path
 }
 
@@ -220,7 +222,7 @@ function save() {
     {
         next()
         ctr += 1;
-        document.getElementById("ctr").innerHTML = 'You processed '+ctr+ ', remaining images '+numImages;
+        document.getElementById("ctr").innerHTML = 'You processed '+ctr+ ', remaining images '+numImages+', total processed images '+procNumImages;
     }
     else{
         alert('something is wrong!')

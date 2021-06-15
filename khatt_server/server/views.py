@@ -10,6 +10,7 @@ from random import shuffle
 from django.http import JsonResponse
 import json
 import shutil
+import re 
 
 @method_decorator(csrf_exempt, name='dispatch')
 class EndpointView(View):
@@ -34,7 +35,7 @@ class EndpointView(View):
             file_name = data['newImageName'].split('.')[0]
             ctr = '' 
             while True:
-                if ctr+file_name not in os.listdir('server/static/processed_larger_images'):
+                if ctr+file_name+'.jpg' not in os.listdir('server/static/processed_larger_images'):
                     shutil.move(f"server/static/larger_images/{data['oldImageName']}",
                                 f"server/static/processed_larger_images/{ctr+file_name}.jpg")
                     break 
@@ -58,9 +59,27 @@ class NextImageView(View):
         # uploaded_images_paths = os.listdir('server/larger_data')
         # uploaded_images_names = [image_path.split('.')[0] for image_path in uploaded_images_paths]
         image_paths = os.listdir('server/static/larger_images/')
+        processed_image_paths = os.listdir('server/static/processed_larger_images/')
         shuffle(image_paths)
         for image_path in image_paths:
-            return JsonResponse({'image_path':image_path, 'num_images':len(image_paths)})
+            if 'بسم الله' not in image_path:
+                return JsonResponse({'image_path':image_path, 'num_images':len(image_paths),
+                    'proc_num_images':len(processed_image_paths)})
+        return None
+
+
+    def get(self, request, *args, **kwargs):
+        return HttpResponse(self.get_next_image_name())
+
+class NextImage2View(View):
+
+    def get_next_image_name(self):
+        image_paths = os.listdir('server/static/images_non_annotated/')
+        processed_image_paths = os.listdir('server/static/larger_images/')
+        shuffle(image_paths)
+        for image_path in image_paths:
+            return JsonResponse({'image_path':image_path, 'num_images':len(image_paths),
+                    'proc_num_images':len(processed_image_paths)})
         return None
 
 
@@ -89,19 +108,20 @@ class Endpoint2View(View):
             data = json.loads(request.body)
             image_name = data["imageName"]
             text = data["text"]
-            print(text)
-            print(os.listdir('server/larger_data'))
-            file_path = None
-            counter = 1
+            file_name = text
+            ctr = ''
             while True:
-                if str(counter)+text+'.jpg' not in os.listdir('server/larger_data'):
-                    if text+'.jpg' not in os.listdir('server/larger_data'):
-                        file_path = f"server/larger_data/{text}"
+                if ctr+file_name+'.jpg' not in os.listdir('server/static/larger_images'):
+                    shutil.move(f'server/static/images_non_annotated/{image_name}',
+                    f'server/static/larger_images/{ctr+file_name}.jpg')
+                    break 
+                else:
+                    if ctr == '':
+                        ctr = '1'
                     else:
-                        file_path = f"server/larger_data/{str(counter)+text}"
-                    break
-                counter += 1
-            shutil.move(f'server/static/larger_images/{image_name}',f'{file_path}.jpg')
+                        ctr = str(int(ctr)+1)
+
+
             result = JsonResponse({'result':True})
         except Exception as e:
                 print(e)
