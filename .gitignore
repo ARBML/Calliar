@@ -12,3 +12,5 @@ venv/*
 *.zip
 *.npz
 *.svg
+!media/*
+!dataset.zip
