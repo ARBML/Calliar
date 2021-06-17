@@ -50,7 +50,6 @@ Video("tmp/video.mp4")
 ```
 
 ## Samples 
-![sample_calliar_image_2](media/sample_calliar_image_2.png)
 ![sample_calliar_image_1](media/sample_calliar_image.png)
 ![sample_calliar_image_3](media/sample_calliar_image_3.png)
 
