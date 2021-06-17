@@ -50,8 +50,10 @@ Video("tmp/video.mp4")
 ```
 
 ## Samples 
-![sent_variations](https://user-images.githubusercontent.com/15667714/122015992-4b470c00-cdc9-11eb-8488-06637f6271e7.png)
-![sketches](https://user-images.githubusercontent.com/15667714/122016000-4d10cf80-cdc9-11eb-8ed1-7b5bfc38a264.png)
+![sample_calliar_image_2](media/sample_calliar_image_2.png)
+![sample_calliar_image_1](media/sample_calliar_image.png)
+![sample_calliar_image_3](media/sample_calliar_image_3.png)
+
 
 ## Animation
 
