@@ -11,15 +11,19 @@ Test | 250 | 753 |3,052 | 4,601
 
 ## Dataset Formats 
 Mainly, we have two basic formats. 
-## .json 
+### .json 
 
 Each `.json` file contains a list of strokes. Each list is a dictionary of the stroke character and the list of points. Each composite character like `ت` is mapped into a list of primitive strokes i.e `..ٮ `. Refer to the paper and to `chars.py` for more details on the mapping. 
 
 ![](media/data_format.PNG)
 
-## .npz 
+### .npz 
 
 The compressed format of the dataset `dataset.npz` is only 8.6 MB and uses the Ramer-Douglas-Peucker Algorithm to decrease the number of points per stroke. The python library [rdp](https://github.com/fhirschmann/rdp) was used for such task. The `.npz` format follows the same approach as [QuickDraw](https://github.com/googlecreativelab/quickdraw-dataset). 
+
+## Different Calligraphic Styles 
+Our dataset supports many calligraphic styles 
+![](media/different_calls.PNG)
 
 ## Visualization 
 
