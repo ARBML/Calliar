@@ -15,7 +15,7 @@ Mainly, we have two basic formats.
 
 Each `.json` file contains a list of strokes. Each list is a dictionary of the stroke character and the list of points. Each composite character like `ت` is mapped into a list of primitive strokes i.e `..ٮ `. Refer to the paper and to `chars.py` for more details on the mapping. 
 
-![](media/data_format.PNG)
+![](media/data_format_colored.png)
 
 ### .npz 
 
