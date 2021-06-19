@@ -21,9 +21,6 @@ Each `.json` file contains a list of strokes. Each list is a dictionary of the s
 
 The compressed format of the dataset `dataset.npz` is only 8.6 MB and uses the Ramer-Douglas-Peucker Algorithm to decrease the number of points per stroke. The python library [rdp](https://github.com/fhirschmann/rdp) was used for such task. The `.npz` format follows the same approach as [QuickDraw](https://github.com/googlecreativelab/quickdraw-dataset). 
 
-## Different Calligraphic Styles 
-Our dataset supports many calligraphic styles 
-![](media/different_calls.PNG)
 
 ## Visualization 
 
