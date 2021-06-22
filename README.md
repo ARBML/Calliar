@@ -69,7 +69,15 @@ https://user-images.githubusercontent.com/15667714/122690261-1d325380-d231-11eb-
 https://user-images.githubusercontent.com/15667714/122690265-1efc1700-d231-11eb-9830-328725a82c11.mp4
 
 
+## Citation 
 
+```
+@inproceedings{Alyafeai2021CalliarAO,
+  title={Calliar: An Online Handwritten Dataset for Arabic Calligraphy},
+  author={Zaid Alyafeai and Maged S. Al-shaibani and Mustafa Ghaleb and Yousif Ahmed Al-Wajih},
+  year={2021}
+}
+```
 
 
 
