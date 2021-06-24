@@ -2,16 +2,17 @@
 <!DOCTYPE html>
 <html lang="" xml:lang="" xmlns="http://www.w3.org/1999/xhtml">
  <head>
-  <meta charset="utf-8"/>
-  <meta name="twitter:card" content="summary" />
-<meta property="og:url" content="https://arbml.github.io/Calliar/page/index.html" />
-<meta property="og:title" content="Calliar: An Online Handwritten Dataset for Arabic Calligraphy" />
-<meta property="og:description" content="Calligraphy is an essential part of the Arabic heritage and culture. It has been used in the past for the decoration of houses and mosques. Usually, such calligraphy is designed manually by experts with aesthetic insights. In the past few years, there has been a considerable effort to digitize such type of art by either taking a photo of decorated buildings or drawing them using digital devices. The latter is considered an online form where the drawing is tracked by recording the apparatus movement, an electronic pen for instance, on a screen. In the literature, there are many offline datasets collected with a diversity of Arabic styles for calligraphy. However, there is no available online dataset for Arabic calligraphy. In this paper, we illustrate our approach for the collection and annotation of an online dataset for Arabic calligraphy called Calliar that consists of 2,500 sentences. Calliar is annotated for stroke, character, word and sentence level prediction." />
-<meta property="og:image" content="https://raw.githubusercontent.com/ARBML/Calliar/main/media/sample_calliar_image_3.png" />
+    <meta charset="utf-8"/>
+    <meta name="twitter:card" content="summary" />
+    <meta property="og:url" content="https://arbml.github.io/Calliar/page/index.html" />
+    <meta property="og:title" content="Calliar: An Online Handwritten Dataset for Arabic Calligraphy" />
+    <meta property="og:description" content="Calligraphy is an essential part of the Arabic heritage and culture. It has been used in the past for the decoration of houses and mosques. Usually, such calligraphy is designed manually by experts with aesthetic insights. In the past few years, there has been a considerable effort to digitize such type of art by either taking a photo of decorated buildings or drawing them using digital devices. The latter is considered an online form where the drawing is tracked by recording the apparatus movement, an electronic pen for instance, on a screen. In the literature, there are many offline datasets collected with a diversity of Arabic styles for calligraphy. However, there is no available online dataset for Arabic calligraphy. In this paper, we illustrate our approach for the collection and annotation of an online dataset for Arabic calligraphy called Calliar that consists of 2,500 sentences. Calliar is annotated for stroke, character, word and sentence level prediction." />
+    <meta property="og:image" content="https://raw.githubusercontent.com/ARBML/Calliar/main/media/sample_calliar_image_3.png" />
 
-  <title>
-   Calliar
-  </title>
+    <title>
+        Calliar
+    </title>
+
   <style type="text/css">
    :root {
     --small-thumb-border-radius: 2px;
@@ -502,8 +503,15 @@ h3.figtitle {
    </h2>
    <p style = "text-align: justify;">
     Calligraphy is an essential part of the Arabic heritage and culture. It has been used in the past for the decoration of houses and mosques. Usually, such calligraphy is designed manually by experts with aesthetic insights. In the past few years, there has been a considerable effort to digitize such type of art by either taking a photo of decorated buildings or drawing them using digital devices. The latter is considered an online form where the drawing is tracked by recording the apparatus movement, an electronic pen for instance, on a screen. In the literature, there are many offline datasets collected with a diversity of Arabic styles for calligraphy. However, there is no available online dataset for Arabic calligraphy. In this paper, we illustrate our approach for the collection and annotation of an online dataset for Arabic calligraphy called Calliar that consists of 2,500 sentences. Calliar is annotated for stroke, character, word and sentence level prediction.   </p>
+    
+    <div id="canvas" style = "border-style:solid;"> 
+    </div>
 
-   <h2 id="videos">
+    <button>
+        Animate
+    </button>   
+
+   <h2 id="videos" style = "padding-right:-10%;">
     Videos
    </h2>
   
@@ -582,4 +590,10 @@ h3.figtitle {
   <div>
     This website uses the template from <a href="https://nvlabs.github.io/alias-free-gan/">alias-free-gan</a>. 
     </div>
+
+
+<script src="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src = "json.js"></script>
+<script src = "index.js"></script>
   
