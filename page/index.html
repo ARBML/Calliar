@@ -439,6 +439,32 @@ h3.figtitle {
 .fig-preload {
     display: none;
 }
+.button {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 10px 15px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 12px;
+  margin: 4px 2px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+}
+
+.button2 {
+  background-color: white; 
+  color: black; 
+  border: 1px solid #008CBA;
+}
+
+.button2:hover {
+  background-color: #008CBA;
+  color: white;
+}
+
+
 /*---------------------------------------------------------------------*/
   </style>
   <!-- inline stylesheet files into the above <style> element -->
@@ -504,12 +530,19 @@ h3.figtitle {
    <p style = "text-align: justify;">
     Calligraphy is an essential part of the Arabic heritage and culture. It has been used in the past for the decoration of houses and mosques. Usually, such calligraphy is designed manually by experts with aesthetic insights. In the past few years, there has been a considerable effort to digitize such type of art by either taking a photo of decorated buildings or drawing them using digital devices. The latter is considered an online form where the drawing is tracked by recording the apparatus movement, an electronic pen for instance, on a screen. In the literature, there are many offline datasets collected with a diversity of Arabic styles for calligraphy. However, there is no available online dataset for Arabic calligraphy. In this paper, we illustrate our approach for the collection and annotation of an online dataset for Arabic calligraphy called Calliar that consists of 2,500 sentences. Calliar is annotated for stroke, character, word and sentence level prediction.   </p>
     
-    <div id="canvas" style = "border-style:solid;padding-left: 50px"> 
-    </div>
-
-    <button>
-        Animate
-    </button>   
+    <h2 id="videos">
+        Demo
+    </h2>
+    <p style = "text-align: justify;">
+        You can generate an animation of a subset of the data set by clicking the button below. Note that this runs directly in the browser hence we only used 100 samples for demonstration.  
+    </p>
+    <div style = "text-align: center; margin: 0 auto;">
+        <div id="canvas" style = "border-width: thin;border-color: black;border-style:solid"> 
+        </div>
+        <button class = "button button2">
+            Generate
+        </button>
+    </div>    
 
    <h2 id="videos">
     Videos

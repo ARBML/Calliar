@@ -1,4 +1,4 @@
-var canvas = Raphael('canvas', '600', '600');
+var canvas = Raphael('canvas', '300', '250');
 
 function create_data(drawing){
     var data = []
@@ -41,8 +41,8 @@ function create_data(drawing){
     const min_y = Math.min(...ys);
     const max_y = Math.max(...ys);
 
-    const margin_x = (600 - max_x - min_x)/2;
-    const margin_y = (600 - max_y - min_y)/2;
+    const margin_x = (300 - max_x - min_x)/2;
+    const margin_y = (300 - max_y - min_y)/2;
 
     var new_data = [];
 
@@ -69,9 +69,14 @@ function getSvgPathFromStroke(stroke) {
 
 
 var animateLine = function(path, canvas, color) {
-        var line = canvas.path(path).attr({
-            stroke: color
-        });
+      var line = canvas.path(path).attr({
+          stroke: color
+      });
+      var box = line.getBBox();    
+      var margin = Math.max( box.width, box.height ) * 0.5 //  because white space always looks nice ;-)
+      canvas.setViewBox(box.x - margin, box.y - margin, box.width + margin * 2, box.height + margin * 2);   
+
+
       var length = line.getTotalLength();
       $('path').animate({
           'to': 1}, {
@@ -81,7 +86,7 @@ var animateLine = function(path, canvas, color) {
               var subpath = line.getSubpath(0, offset);
               canvas.clear();
               canvas.path(subpath).attr({
-                  'stroke-width': 3,
+                  'stroke-width': 2,
                   stroke: color
                 });
 
