@@ -45,9 +45,6 @@ function create_data(drawing){
     const margin_y = (600 - max_y - min_y)/2;
 
     var new_data = [];
-    console.log(margin_x)
-    console.log(min_x)
-    console.log(max_x)
 
     for (let i = 0; i < data.length; i++){
       [x, y, z] = data[i];
@@ -76,8 +73,6 @@ var animateLine = function(path, canvas, color) {
             stroke: color
         });
       var length = line.getTotalLength();
-      line = line.scale(0.5, 0.5)
-
       $('path').animate({
           'to': 1}, {
           duration: parseInt(length * 2),
@@ -107,7 +102,7 @@ var next_path = 0 ;
 b.onclick = function(){
 
   var full_path = "";
-  var drawing = eval("stroke_"+randomNumber(0, 2000));
+  var drawing = eval("stroke_"+randomNumber(0, 100));
   const data = create_data(drawing)
   var currStroke = [];
   var paths = [] ;
