@@ -78,10 +78,13 @@ https://user-images.githubusercontent.com/15667714/122690265-1efc1700-d231-11eb-
 ## Citation 
 
 ```
-@inproceedings{Alyafeai2021CalliarAO,
-  title={Calliar: An Online Handwritten Dataset for Arabic Calligraphy},
-  author={Zaid Alyafeai and Maged S. Al-shaibani and Mustafa Ghaleb and Yousif Ahmed Al-Wajih},
-  year={2021}
+@misc{alyafeai2021calliar,
+      title={Calliar: An Online Handwritten Dataset for Arabic Calligraphy}, 
+      author={Zaid Alyafeai and Maged S. Al-shaibani and Mustafa Ghaleb and Yousif Ahmed Al-Wajih},
+      year={2021},
+      eprint={2106.10745},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL}
 }
 ```
 
