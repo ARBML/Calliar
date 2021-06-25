@@ -9,11 +9,11 @@ Calliar is a dataset for Arabic calligraphy. The dataset consists of 2500 json f
 
 ## Stats 
 
-| # of Samples | # of Words | # of Chars | # of Strokes | 
----------------|-----------|------------|---------------
-Train | 2,000 | 6,065 | 24,722 | 36,561 
-Valid | 250 | 738 | 2,946 | 4,410 
-Test | 250 | 753 |3,052 | 4,601 
+| Dataset | # of Samples | # of Words | # of Chars | # of Strokes | 
+---------|---------------|-----------|------------|---------------
+| Train | 2,000 | 6,065 | 24,722 | 36,561 |
+| Valid | 250 | 738 | 2,946 | 4,410 |
+| Test | 250 | 753 |3,052 | 4,601 |
 
 ## Dataset Formats 
 Mainly, we have two basic formats. 
