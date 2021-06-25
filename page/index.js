@@ -1,5 +1,8 @@
-var canvas = Raphael('canvas', '600', '600');
-
+var w = 600;
+var h = 600;
+var canvas = Raphael('canvas');
+canvas.setViewBox(0,0,w,h);
+canvas.setSize('100%', '100%');
 function create_data(drawing){
     var data = []
     var new_data = []
@@ -70,14 +73,16 @@ function getSvgPathFromStroke(stroke) {
 
 var animatePath = function(paths) {
   color = colors[randomNumber(0, colors.length)]
-  console.log(paths.length)
+  // console.log(paths.length)
   document.getElementById("generate").disabled = true;
   var line = canvas.path(paths[0]).attr({
       stroke: color,
       'stroke-opacity': 0,
   });
+  
   var rand = Date.now();
   line.node.id = 'path'+rand;
+  $('#'+line.node.id).css("transform", "translate(30,7)");
   var length = line.getTotalLength();
   var prev_path;
   $('#'+line.node.id).animate({
@@ -101,7 +106,7 @@ var animatePath = function(paths) {
       complete: function(){
         if (paths.length > 0){
           animatePath(paths.slice(1))
-          console.log('#'+line.node.id)
+          // console.log('#'+line.node.id)
         }
         else{
           document.getElementById("generate").disabled = false;
