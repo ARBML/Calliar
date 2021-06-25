@@ -1,4 +1,4 @@
-var canvas = Raphael('canvas', '300', '250');
+var canvas = Raphael('canvas', '600', '600');
 
 function create_data(drawing){
     var data = []
@@ -41,8 +41,8 @@ function create_data(drawing){
     const min_y = Math.min(...ys);
     const max_y = Math.max(...ys);
 
-    const margin_x = (300 - max_x - min_x)/2;
-    const margin_y = (300 - max_y - min_y)/2;
+    const margin_x = (600 - max_x - min_x)/2;
+    const margin_y = (600 - max_y - min_y)/2;
 
     var new_data = [];
 
@@ -68,32 +68,50 @@ function getSvgPathFromStroke(stroke) {
   }
 
 
-var animateLine = function(path, canvas, color) {
-      var line = canvas.path(path).attr({
-          stroke: color
-      });
-      var box = line.getBBox();    
-      var margin = Math.max( box.width, box.height ) * 0.5 //  because white space always looks nice ;-)
-      canvas.setViewBox(box.x - margin, box.y - margin, box.width + margin * 2, box.height + margin * 2);   
+var animatePath = function(paths) {
+  color = colors[randomNumber(0, colors.length)]
+  console.log(paths.length)
+  document.getElementById("generate").disabled = true;
+  var line = canvas.path(paths[0]).attr({
+      stroke: color,
+      'stroke-opacity': 0,
+  });
+  var rand = Date.now();
+  line.node.id = 'path'+rand;
+  var length = line.getTotalLength();
+  var prev_path;
+  $('#'+line.node.id).animate({
+      'to': 1}, {
+      duration: parseInt(length*2),
+      step: function(pos, fx) {
+          var offset = length * fx.pos;
+          var subpath = line.getSubpath(0, offset);
+          if (prev_path != null)
+          {
+            prev_path.remove();
+          }
+          
+          prev_path = canvas.path(subpath).attr({
+            'stroke-width': 3,
+            stroke: color
+          });
 
 
-      var length = line.getTotalLength();
-      $('path').animate({
-          'to': 1}, {
-          duration: parseInt(length * 2),
-          step: function(pos, fx) {
-              var offset = length * fx.pos;
-              var subpath = line.getSubpath(0, offset);
-              canvas.clear();
-              canvas.path(subpath).attr({
-                  'stroke-width': 2,
-                  stroke: color
-                });
+      },
+      complete: function(){
+        if (paths.length > 0){
+          animatePath(paths.slice(1))
+          console.log('#'+line.node.id)
+        }
+        else{
+          document.getElementById("generate").disabled = false;
+        }
+        
+        index += 1;
+      }
+  });
 
-          },
-      });
 };
-
 function randomNumber(min, max) {
   return Math.floor(Math.random() * (max - min) + min);
 }
@@ -103,14 +121,19 @@ var p = [];
 var total = 0;
 var notFinished = true;
 var next_path = 0 ;
-
+var index = 0 ;
+var paths = [];
+var myVar;
+var colors = ['#7fc97f', '#beaed4', '#fdc086', '#008ecc', '#386cb0', '#f0027f', '#bf5b16', '#666666']
 b.onclick = function(){
-
+  canvas.clear();
+  index = 0; 
   var full_path = "";
   var drawing = eval("stroke_"+randomNumber(0, 100));
+  // drawing = stroke_3
   const data = create_data(drawing)
   var currStroke = [];
-  var paths = [] ;
+  paths = [] ;
   for(var i = 0 ; i < data.length ; i++){
       [x, y , z] = data[i]
       currStroke.push([x, y])
@@ -123,18 +146,6 @@ b.onclick = function(){
       }
     
   }
-
-  function sleep(milliseconds) {
-    var start = new Date().getTime();
-    for (var i = 0; i < 1e7; i++) {
-      if ((new Date().getTime() - start) > milliseconds){
-        break;
-      }
-    }
-  }
-
-  animateLine(paths, canvas, "#0198E1") 
-
-   
-
+ 
+  animatePath(paths)
 };
