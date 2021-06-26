@@ -97,7 +97,7 @@ var animatePath = function(paths) {
           }
           
           prev_path = canvas.path(subpath).attr({
-            'stroke-width': 3,
+            'stroke-width': strokeWidth,
             stroke: color
           });
 
@@ -130,7 +130,10 @@ var index = 0 ;
 var paths = [];
 var myVar;
 var colors = ['#7fc97f', '#beaed4', '#fdc086', '#008ecc', '#386cb0', '#f0027f', '#bf5b16', '#666666']
+var strokeWidth;
+
 b.onclick = function(){
+  strokeWidth = document.getElementById('slider').value
   canvas.clear();
   index = 0; 
   var full_path = "";
