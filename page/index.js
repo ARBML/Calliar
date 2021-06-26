@@ -3,6 +3,7 @@ var h = 600;
 var canvas = Raphael('canvas', '300px', '300px');
 canvas.setViewBox(0,0,w,h);
 canvas.setSize('100%', '100%');
+
 function create_data(drawing){
     var data = []
     var new_data = []

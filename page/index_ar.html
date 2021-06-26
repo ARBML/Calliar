@@ -10,9 +10,10 @@
     <meta property="og:image" content="https://raw.githubusercontent.com/ARBML/Calliar/main/media/sample_calliar_image_3.png" />
 
     <title>
-        Calliar
+        كاليار
     </title>
 
+    
   <style type="text/css">
    :root {
     --small-thumb-border-radius: 2px;
@@ -271,7 +272,7 @@ ul.resources {
 
 figcaption, .figcaption {
     color: rgba(0, 0, 0, 0.6);
-    font-size: 12px;
+    font-size: 15px;
     line-height: 1.5em;
 }
 
@@ -280,6 +281,7 @@ ul.authors {
     padding: 0;
     margin: 0;
     text-align: center;
+    font-size: 15px;
 }
 
 ul.resources {
@@ -287,7 +289,7 @@ ul.resources {
     padding: 0;
     margin: 0;
     text-align: center;
-    font-size: 20px;
+    font-size: 15px;
 }
 
 ul.authors li {
@@ -505,65 +507,53 @@ h3.figtitle {
   <link href="https://fonts.googleapis.com/css?family=Montserrat|Segoe+UI" rel="stylesheet"/>
  </head>
  <body>
-
     <select onchange="if (this.value) window.location.href=this.value">
-        <option value="index.html">English</option>
-        <option value="index_ar.html">Arabic</option>
-
+        <option value="index_ar.html">عربي</option>
+        <option value="index.html">انجليزي</option>
     </select>
+
   <div class="n-header">
   </div>
-  <div class="n-title">
+  <div class="n-title" dir = 'rtl'>
    <h1>
-    Calliar: An Online Handwritten Dataset for Arabic Calligraphy
+    كاليار: مجموعة بيانات موسمة للخطوط العربية
    </h1>
   </div>
-  <div class="n-byline">
+  <div class="n-byline" dir = 'rtl'>
    <div class="byline">
     <ul class="authors">
      <li>
-        Zaid Alyafeai
-      <sup>
-       1
-      </sup>
+        زيد اليافعي
      </li>
 
      <li>
-        Maged S. Al-shaibani
-      <sup>
-       1
-      </sup>
+        ماجد الشيباني
+
      </li>
 
      <li>
-        Mustafa Ghaleb
-      <sup>
-       1
-      </sup>
+        مصطفى غالب
+
      </li>
 
      <li>
-        Yousif Ahmed Al-Wajih
-      <sup>
-       1
-      </sup>
+        يوسف الوجيه
+
      </li>
 
     </ul>
     <ul class="authors affiliations">
      <li>
-      <sup>
-       1
-      </sup>
-      KFUPM
+
+      جامعة الملك فهد للبترول والمعادن
      </li>
     </ul>
     <ul class="resources">
         <li>
-         <a href = "https://arxiv.org/abs/2106.10745">arXiv</a> 
+         <a href = "https://arxiv.org/abs/2106.10745">الورقة البحثية</a> 
         </li>
         <li>
-            <a href = "https://github.com/ARBML/Calliar">GitHub</a>
+            <a href = "https://github.com/ARBML/Calliar">الأكواد</a>
         </li>
        </ul>
 
@@ -573,80 +563,55 @@ h3.figtitle {
    <div class="l-article">
     <img src = "https://raw.githubusercontent.com/ARBML/Calliar/main/media/sample_calliar_image_3.png" width="100%"> </img>
     </div>
-   <h2 id="abstract">
-    Abstract
+   <h2 id="abstract" dir = 'rtl'>
+    ملخص
    </h2>
-   <p style = "text-align: justify;">
-    Calligraphy is an essential part of the Arabic heritage and culture. It has been used in the past for the decoration of houses and mosques. Usually, such calligraphy is designed manually by experts with aesthetic insights. In the past few years, there has been a considerable effort to digitize such type of art by either taking a photo of decorated buildings or drawing them using digital devices. The latter is considered an online form where the drawing is tracked by recording the apparatus movement, an electronic pen for instance, on a screen. In the literature, there are many offline datasets collected with a diversity of Arabic styles for calligraphy. However, there is no available online dataset for Arabic calligraphy. In this paper, we illustrate our approach for the collection and annotation of an online dataset for Arabic calligraphy called Calliar that consists of 2,500 sentences. Calliar is annotated for stroke, character, word and sentence level prediction.   </p>
+   <p style = "text-align: justify;" dir = 'rtl'>
+    يعد الخط جزءًا أساسيًا من التراث والثقافة العربية. وقد استخدم قديماً لتزيين المنازل والمساجد. عادةً ما يتم تصميم هذا الخط يدويًا بواسطة خبراء يتمتعون برؤى جمالية. في السنوات القليلة الماضية ، كان هناك جهد كبير لرقمنة هذا النوع من الفن إما عن طريق التقاط صورة للمباني المزخرفة أو رسمها باستخدام الأجهزة الرقمية. يعتبر هذا الأخير نموذجًا عبر الإنترنت حيث يتم تتبع الرسم عن طريق تسجيل حركة الجهاز ، مثل القلم الإلكتروني ، على الشاشة. في البحوث المنشورة ، هناك العديد من مجموعات البيانات لرقمنة الخطوط العربية التي تم جمعها مع مجموعة متنوعة من أنماط الخط العربي. ومع ذلك ، لا توجد مجموعة بيانات متاحة لتتبع الرسم للخط العربي. في هذه الورقة، نوضح منهجنا في جمع مجموعة بيانات عبر الإنترنت للخط العربي تسمى كاليار
+    . تم جمع 2500 صورة وتوسيمها بالرسم ليمكن اتمتة العملية بسهولة تامة في المستقبل.   
+        
+    </p>
     
-    <h2>
-        Demo
+    <h2 dir = 'rtl'>
+        تجربة
     </h2>
-    <p style = "text-align: justify;">
-        You can generate an animation of a subset of the data set by clicking the button below. Note that this runs directly in the browser hence we only used 100 samples for demonstration.  
-        The 100 json files where converted to a minified version where all points were converted to integers with no stroke annotations. At each press of generate a new 
-        sketch is rendered where each stroke is drawn in different color. The annimation speed is propotional to the length of the stroke. You will see that some 
-        strokes might have fast animations and some slow. 
+    <p style = "text-align: justify;" dir = 'rtl'>
+        يمكنك إنشاء رسم متحرك لمجموعة  صغيرة من الملفات من مجموعة البيانات بالنقر فوق الزر أدناه. لاحظ أن هذا يعمل مباشرة في المتصفح ومن ثم استخدمنا 100 عينة فقط للتوضيح. تم تحويل 100 ملف json إلى إصدار مصغر حيث تم تحويل جميع النقاط إلى أعداد صحيحة . عند كل ضغطة على إنشاء ، يتم تقديم رسم جديد حيث يتم رسم كل حد بلون مختلف.
     </p>
 
     <div style = "text-align: center; margin: 0 auto;">
         <div id="canvas" style = "border-width: thin;border-color: black;border-style:solid"> 
         </div>
         <button class = "button button2" id = "generate">
-            Generate
+            إنشاء 
         </button> <input type="range" id = 'slider' min="1" max="10" value="3">
     </div> 
 
-    <h2 id="videos">
-        Collection & Annotation
+    <h2 id="videos" dir = 'rtl'>
+        توسيم البيانات
     </h2>
-    <p style = "text-align: justify;">
-    The collection procedure was done during a span of months. We used some of the images that we collected to generate some calligraphy as shown in the image below. One of the main websites 
-    that we used initially is  <a href= "https://www.namearabic.com/">namearabic</a>. Luckily this dataset had some text annotation and we had only to spend 
-    a few hours to annotate with drawing a few hundred images. For other datasets we had to annotate the images with text then with sketch drawing.
+    <p style = "text-align: justify;" dir = 'rtl'>
     
-    The annotation procedure took a few weeks. We used two Samsung Galaxy Tab S6 tablets as the main devices for the annotation procedure. It took two main phases: the first one 
-    annotates each image with a text. In the second phase we used the pen of the tablet to draw the annotation. We repeated these steps multiple times to increase the size of the dataset. Because 
-    the intial dataset was 600x600 we decided to fix the max dimension to 600 and rescale the other dimension accordingly to preserve the spect ratio. During the annotation process 
-    we faced many problems like empty annotations, repeated strokes and problems with the touch screen which created wrong annotations. To deal with these problems, 
-    we made a lot of back and forth verification steps from directly annotating and then animating the results immediately using Python. We would annotate some images then remove them because they had some problems. 
-    One sanity check that used is to compare the text annoation with the json stroke annotation. This gives us some quick discovery of empty annotations. The other problems are difficult to deal with especially the problem 
-    of having wrong drawings by the tablet. We relied on post processing to get rid of such annotations by comparing the variance of the points in one stroke drawing. 
-
+تم إجراء عملية جمع البيانات خلال عدة أشهر. استخدمنا بعض الصور التي جمعناها لإنشاء الخط بشكل اتوماتيكي  كما هو موضح في الصورة أدناه. أحد المواقع الرئيسية التي استخدمناها في البداية هو موقع الأسماء العربية. لحسن الحظ ، كانت مجموعة البيانات هذه تحتوي على بعض التعليقات التوضيحية النصية وكان علينا فقط قضاء بضع ساعات لتوسميها برسم بضع مئات من الصور. بالنسبة لمجموعات البيانات الأخرى ، كان علينا أن نوسم الصور بالنص ثم بالرسم التخطيطي. استغرق إجراء التعليق التوضيحي بضعة أسابيع. استخدمنا جهازي تابليت لوحي Samsung Galaxy Tab S6 كأجهزة رئيسية لإجراء التعليقات التوضيحية. استغرق الأمر مرحلتين رئيسيتين: الأولى تعلق على كل صورة بنص. في المرحلة الثانية ، استخدمنا قلم الكمبيوتر اللوحي لرسم التعليق التوضيحي. كررنا هذه الخطوات عدة مرات لزيادة حجم مجموعة البيانات. نظرًا لأن مجموعة البيانات الأولية كانت 600 × 600 ، فقد قررنا تحويل البعد الأقصى إلى 600 وإعادة قياس البعد الآخر وفقًا لذلك للحفاظ على نسبة أبعاد الصورة. أثناء عملية التعليقات التوضيحية ، واجهنا العديد من المشكلات مثل التعليقات التوضيحية الفارغة ، الرسوم متكررة ومشاكل في شاشة اللمس أدت إلى إنشاء تعليقات توضيحية خاطئة. للتعامل مع هذه المشاكل ، اتخذنا الكثير من خطوات التحقق بشكل دوري  عن طريق رسمها بواسطة بايثون.  في بعض الأوقات نضع رسومات على بعض الصور ثم نزيلها لأن لديهم بعض المشاكل. أحد عمليات التحقق من الصحة المستخدمة هو مقارنة نص الصورة مع وسم الحروف المختلفة . هذا يعطينا فكرة سريعة عن الأخطاء الشائعة. من الصعب التعامل مع المشاكل الأخرى خاصة مشكلة وجود رسومات خاطئة على الجهاز اللوحي. لقد اعتمدنا على معالجة الملفات المحفوظة على شكل json لتتخلص من هذه المشاكل. 
     </p>
     <img src = "https://raw.githubusercontent.com/zaidalyafeai/sgan/master/calligraphyv2.PNG" width="100%"> </img>
     
        
 
-    <h2 id="videos">
-        Creative Applications
+    <h2 id="videos" dir = 'rtl'>
+        التطبيقات الذكية
     </h2>
-    <p style = "text-align: justify;">
-        There is a lot of controversy in the field of AI whether we can use it to create some intelligent and artistic programs.
-        In the last few years there has been a lot of research in applying AI creatively like Style Transfer<sup>[1]</sup>,
-        Deep Dream<sup>[2]</sup>, GauGAN<sup>[3]</sup>, etc. Most of these technologies apply for images. These applications apply mostly for computer vision, on the other
-        hand it is much more difficult in natural language processing (NLP). The intrinsic difficulty lies in the complexity 
-        of modelling language, let alone creating some creative applications. One of the most interesting applications are sketch generation. 
-        One of the most interesting papers is the one Alex Graves <a href ="https://arxiv.org/abs/1308.0850">Generating Sequences With Recurrent Neural Networks</a>. 
-        The paper assumes the existance of an online corpus for generation stroke sequences for Engish. Building upon that, there has been many papers in that field like
-        sketchRNN<sup>[4]</sup>, GANwriting<sup>[5]</sup>, Scrabble-GANs<sup>[6]</sup>, DF-GANs<sup>[7]</sup>, BézierSketch<sup>[8]</sup> and DoodlerGAN<sup>[9]</sup>. Most of these papers work on English and it is needless to mention how simple English is 
-        compared to other languages like Arabic. The complexity of Arabic raises from the cursive nature of connecting letters together. Not to mention the long history 
-        of Arabic calligraphy which is used extensively nowadays. The different styles of Arabic calligraphy joint with the freedom of drawing some letters makes the problem much harder. 
-
-        Being the only dataset that collect online stroke information for different calligraphic styles, this opens the door for many applications. 
-        The difficulty still lies in modelling natural language from the strokes. There is a trade-off between creating nice strokes and generating sensible language. In the literature, 
-        most of the generated strokes are usually words not sentences. In Arabic calligraphy, creating words is not an interesting problem. Much of the beauty is from following style in addition to 
-        conditioning the words to specific text view which is usually a circle like in Diwani and square like in Kufi.  A proper contribution that we want to achieve in the future is to generate calligraphy 
-        conditioned on style and text. 
+    <p style = "text-align: justify;" dir = 'rtl'>
+        هناك الكثير من الجدل في مجال الذكاء الاصطناعي حول ما إذا كان بإمكاننا استخدامه لإنشاء بعض البرامج الذكية والفنية. في السنوات القليلة الماضية ، كان هناك الكثير من الأبحاث في تطبيق الذكاء الاصطناعي بشكل إبداعي مثل Style Transfer [1] و Deep Dream [2] و GauGAN [3] وما إلى ذلك. تنطبق معظم هذه التقنيات على الصور.  من ناحية أخرى ، فهي أكثر صعوبة في معالجة اللغة الطبيعية (NLP). تكمن الصعوبة الجوهرية في تعقيد لغة النمذجة ، ناهيك عن إنشاء بعض التطبيقات الإبداعية. يعد إنشاء الرسومات أحد أكثر التطبيقات إثارة للاهتمام. واحدة من أكثر الأوراق إثارة للاهتمام هي ورقة  Alex Gravesتوليد تسلسلات مع الشبكات العصبية المتكررة . تفترض الورقة وجود مجموعة بيانات موسمة بالرسم لتوليد الخطوط باللغة الإنجليزية. بناءً على ذلك ، كان هناك العديد من الأوراق في هذا المجال مثل sketchRNN [4] و GANwriting [5] و Scrabble-GANs [6] و DF-GANs [7] و BézierSketch [8] و DoodlerGAN [9]. معظم هذه الأوراق مخصصة للبيانات باللغة الإنجليزية ولا داعي لذكر مدى بساطة اللغة الإنجليزية مقارنة باللغات الأخرى مثل العربية. ينشأ تعقيد اللغة العربية من الطبيعة المتصلة للحروف. ناهيك عن التاريخ الطويل للخط العربي الذي يستخدم على نطاق واسع في الوقت الحاضر. تترافق الأنماط المختلفة للخط العربي مع حرية رسم بعض الحروف مما يجعل المشكلة أكثر صعوبة. نظرًا لكون كاليار مجموعة البيانات الوحيدة التي تجمع معلومات الرسوم للخطوط العربية لأنماط الخط المختلفة ، فإن هذا يفتح الباب للعديد من التطبيقات. لا تزال الصعوبة تكمن في نمذجة اللغة الطبيعية من وإنشاء خطوط يمكن فهمها . هناك مفاضلة بين إنشاء خطوط جميلة  وتوليد لغة منطقية.
     </p>
-    <h2 id="videos">
-        Tweet
+    <h2 id="videos" dir = 'rtl'>
+        منشور التويتر
        </h2>
 
         <blockquote class="twitter-tweet tw-align-center"><p lang="en" dir="ltr">Pleased to announce Calliar, the first online dataset for Arabic Calligraphy. Joint work with <a href="https://twitter.com/_MagedSaeed_?ref_src=twsrc%5Etfw">@_MagedSaeed_</a> <a href="https://twitter.com/alwaridi?ref_src=twsrc%5Etfw">@alwaridi</a> and Yousif Al-Wajih. <br>Paper: <a href="https://t.co/q5mwcP6roa">https://t.co/q5mwcP6roa</a><br>Code &amp; data: <a href="https://t.co/tDCPJRYUcl">https://t.co/tDCPJRYUcl</a><br>Colab: <a href="https://t.co/46yD0V3wht">https://t.co/46yD0V3wht</a> <a href="https://t.co/qbbb4tZJ6l">pic.twitter.com/qbbb4tZJ6l</a></p>&mdash; Zaid زيد (@zaidalyafeai) <a href="https://twitter.com/zaidalyafeai/status/1407383686786527234?ref_src=twsrc%5Etfw">June 22, 2021</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
-   <h2 id="videos">
-    Videos
+   <h2 id="videos" dir = 'rtl'>
+    فيديو
    </h2>
   
    <div class="l-article">
@@ -655,11 +620,11 @@ h3.figtitle {
      <source src="https://user-images.githubusercontent.com/15667714/122690255-1acff980-d231-11eb-9752-730d8024041e.mp4" type="video/mp4"/>
     </video>
     <div class="videocaption">
-     <div>
+     <div dir = 'rtl'>
       <strong>
-       Video 1a:
+        الفيديو 1 أ: 
       </strong>
-      Animating various calligraphy styles. 
+      تحريك أنماط الخط المختلفة
      </div>
     </div>
    </div>
@@ -672,9 +637,9 @@ h3.figtitle {
     <div class="videocaption">
      <div>
       <strong>
-       Video 1b:
+        الفيديو 1 ب: 
       </strong>
-      Animating various calligraphy styles. 
+      تحريك أنماط الخط المختلفة 
      </div>
     </div>
    </div>
@@ -687,9 +652,9 @@ h3.figtitle {
     <div class="videocaption">
      <div>
       <strong>
-       Video 3:
+        فيديو 3:
       </strong>
-      Animating the same phrase using multiple styles. 
+      تحريك نفس العبارة باستخدام أنماط متعددة
      </div>
     </div>
    </div>
@@ -704,9 +669,9 @@ h3.figtitle {
     <div class="videocaption">
      <div>
       <strong>
-       Video 3:
+        الفيديو 4:
       </strong>
-      Animating complicated calligraphic styles. 
+      تحريك الأنماط الخطية المعقدة
      </div>
     </div>
    </div>
@@ -721,8 +686,8 @@ h3.figtitle {
         primaryClass={cs.CL}
   }</code></pre>
 
-   <h2>
-    References
+   <h2 dir = 'rtl'>
+    المصادر
    </h2>
    <ol>
     <li>Johnson, Justin, Alexandre Alahi, and Li Fei-Fei. "Perceptual losses for real-time style transfer and super-resolution." European conference on computer vision. Springer, Cham, 2016.</li>
