@@ -539,19 +539,68 @@ h3.figtitle {
    <p style = "text-align: justify;">
     Calligraphy is an essential part of the Arabic heritage and culture. It has been used in the past for the decoration of houses and mosques. Usually, such calligraphy is designed manually by experts with aesthetic insights. In the past few years, there has been a considerable effort to digitize such type of art by either taking a photo of decorated buildings or drawing them using digital devices. The latter is considered an online form where the drawing is tracked by recording the apparatus movement, an electronic pen for instance, on a screen. In the literature, there are many offline datasets collected with a diversity of Arabic styles for calligraphy. However, there is no available online dataset for Arabic calligraphy. In this paper, we illustrate our approach for the collection and annotation of an online dataset for Arabic calligraphy called Calliar that consists of 2,500 sentences. Calliar is annotated for stroke, character, word and sentence level prediction.   </p>
     
-    <h2 id="videos">
+    <h2>
         Demo
     </h2>
     <p style = "text-align: justify;">
         You can generate an animation of a subset of the data set by clicking the button below. Note that this runs directly in the browser hence we only used 100 samples for demonstration.  
+        The 100 json files where converted to a minified version where all points were converted to integers with no stroke annotations. At each press of generate a new 
+        sketch is rendered where each stroke is drawn in different color. The annimation speed is propotional to the length of the stroke. You will see that some 
+        strokes might have fast animations and some slow. 
     </p>
+
     <div style = "text-align: center; margin: 0 auto;">
         <div id="canvas" style = "border-width: thin;border-color: black;border-style:solid"> 
         </div>
         <button class = "button button2" id = "generate">
             Generate
         </button>
-    </div>    
+    </div> 
+    
+    <h2 id="videos">
+        Collection & Annotation
+    </h2>
+    <p style = "text-align: justify;">
+    The collection procedure was done during a span of months. We used some of the images that we collected to generate some calligraphy as shown in the image below. One of the main websites 
+    that we used initially is  <a href= "https://www.namearabic.com/">namearabic</a>. Luckily this dataset had some text annotation and we had only to spend 
+    a few hours to annotate with drawing a few hundred images. 
+    
+    The annotation procedure took a few weeks. We used two Samsung S10 tablets as the main devices for the annotation procedure. It took two main phases: the first one 
+    annotates each image with a text. In the second phase we used the pen of the tablet to draw the annotation. We repeated this steps multiple times to increase the size of the dataset. Because 
+    the intial dataset was 600x600 we decided to fix the max dimension to 600 and rescale the other dimension accordingly to preserve the spect ratio. During the annotation process 
+    we faced many problems like empty annotations, repeated strokes and problems with the touch screen which created wrong annotations. To deal with these problems, 
+    we made a lot of back and forth visualization steps from directly annotating and animating the results directly using Python. We would annotate some images then remove them because they had some problems. 
+    One sanity check that used is to compare the text annoation with the json stroke annotation. This gives us some quick discovery of empty annotations. The other problems are difficult to deal with especially the problem 
+    of having wrong drawings by the tablet. We relied on post processing to get rid of such annotations by comparing the variance of the points in one stroke drawing. 
+
+    </p>
+    <img src = "https://raw.githubusercontent.com/zaidalyafeai/sgan/master/calligraphyv2.PNG" width="100%"> </img>
+    
+       
+
+    <h2 id="videos">
+        Creative Applications
+    </h2>
+    <p style = "text-align: justify;">
+        There is a lot of controversy in the field of AI whether we can use it to create some intelligent and artistic programs.
+        In the last few years there has been a lot of research in applying AI creatively like Style Transfer,
+        Deep Dream, GauGAN, etc. Most of these technologies apply for images. These applications apply mostly for computer vision, on the other
+        hand it is much more difficult in natural language processing (NLP). The intrinsic difficulty lies in the complexity 
+        of modelling language, let alone creating some creative applications. One of the most interesting applications are sketch generation. 
+        One of the most interesting papers is the one Alex Graves <a href ="https://arxiv.org/abs/1308.0850">Generating Sequences With Recurrent Neural Networks</a>. 
+        The paper assumes the existance of an online corpus for generation stroke sequences for Engish. Building upon that, there has been many papers in that field like
+        GANwriting, Scrabble-GANs, DF-GANs, BézierSketch, sketchRNN and DoodlerGAN. Most of these papers work on English and it is needless to mention how simple English is 
+        compared to other languages like Arabic. The complexity of Arabic raises from the cursive nature of connecting letters together. Not to mention the long history 
+        of Arabic calligraphy which is used extensively nowadays. The different styles of Arabic calligraphy joint with the freedom of drawing some letters makes the problem much harder. 
+
+        Being the only dataset that collect online stroke information for different calligraphic styles, this opens the door for many applications. 
+        The difficulty still lies in modelling natural language from the strokes. There is a trade-off between creating nice strokes and generating sensible language. In the literature, 
+        most of the generated strokes are usually words not sentneces. In Arabic calligraphy, creating words is not an interesting problem. Much of the beauty is from following style in addition to 
+        conditioning the words to specific text view which is usually a circle like in Diwani and square like in Kufi.  A proper contribution that we want to achieve in the future is to generate calligraphy 
+        conditioned on style and text. 
+    </p>
+
+
 
    <h2 id="videos">
     Videos
@@ -629,9 +678,23 @@ h3.figtitle {
         primaryClass={cs.CL}
   }</code></pre>
 
+   <h2>
+    References
+   </h2>
+   <ul>
+    <li>Ha, David, and Douglas Eck. "A neural representation of sketch drawings." arXiv preprint arXiv:1704.03477 (2017).</li>
+    <li>Kang, Lei, et al. "GANwriting: Content-conditioned generation of styled handwritten word images." European Conference on Computer Vision. Springer, Cham, 2020.</li>
+    <li>Fogel, Sharon, et al. "ScrabbleGAN: semi-supervised varying length handwritten text generation." Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition. 2020.</li>
+    <li>Tao, Ming, et al. "Df-gan: Deep fusion generative adversarial networks for text-to-image synthesis." arXiv preprint arXiv:2008.05865 (2020).</li>
+    <li>Das, Ayan, et al. "BézierSketch: A generative model for scalable vector sketches." arXiv preprint arXiv:2007.02190 (2020).</li>
+    <li>Ge, Songwei, et al. "Creative Sketch Generation." arXiv preprint arXiv:2011.10039 (2020).</li>
+  </ul>  
+  
+  
+
   <div>
     This website uses the template from <a href="https://nvlabs.github.io/alias-free-gan/">alias-free-gan</a>. 
-    </div>
+ </div>
 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
