@@ -134,27 +134,34 @@ var colors = ['#7fc97f', '#beaed4', '#fdc086', '#008ecc', '#386cb0', '#f0027f', 
 var strokeWidth;
 
 b.onclick = function(){
+  paper.install(window);
+  paper.setup('myCanvas');
   strokeWidth = document.getElementById('slider').value
   canvas.clear();
   index = 0; 
-  var full_path = "";
   var drawing = eval("stroke_"+randomNumber(0, 100));
-  // drawing = stroke_3
+  var path;
   const data = create_data(drawing)
   var currStroke = [];
   paths = [] ;
+
   for(var i = 0 ; i < data.length ; i++){
-      [x, y , z] = data[i]
-      currStroke.push([x, y])
-      if (z == 1)
-      {
-        const pathString = getSvgPathFromStroke(currStroke)
-        full_path = full_path + pathString.join(" ");
-        paths.push(pathString.join(" "))
-        currStroke = [];
+    [x, y , z] = data[i]
+    currStroke.push([x, y])
+    if (z == 1)
+    {
+      path = new Path({
+          strokeColor: 'black',
+          fullySelected: true,
+      });
+      for(var j = 0 ; j < currStroke.length ; j++){
+          var point = currStroke[j]
+          path.add(new Point(point[0], point[1]))
       }
-    
+      path.simplify(10)
+      paths.push(path.exportSVG().getAttribute("d")); 
+      currStroke = [];
+    }
   }
- 
   animatePath(paths)
 };
