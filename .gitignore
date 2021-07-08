@@ -10,5 +10,6 @@ venv/*
 !media/*
 !dataset.zip
 !dataset_words.npz
+!dataset_words_str.npz
 khatt_server/*
 !dataset.npz
