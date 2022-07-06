@@ -56,6 +56,13 @@ Video("tmp/video.mp4")
 ![sample_calliar_image_3](media/sample_calliar_image_3.png)
 
 
+## Annotation Server 
+First `pip install django`, then traverse to the directory `calliar_server` and run 
+
+```basch
+python manage.py runserver
+```
+
 ## Animation
 
 
