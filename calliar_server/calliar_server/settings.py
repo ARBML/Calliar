@@ -125,3 +125,7 @@ CORS_ALLOW_ALL_ORIGINS = True
 MEDIA_ROOT = os.path.join(BASE_DIR, "/images")
 MEDIA_URL = "/media/"
 
+try:
+    from .local_settings import *
+except Exception as e:
+    print('local settings file cannot be imported')
