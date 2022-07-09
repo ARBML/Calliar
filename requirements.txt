@@ -1,3 +1,4 @@
 cairosvg
 svgwrite
-rdp 
+rdp
+django~=3.2 
