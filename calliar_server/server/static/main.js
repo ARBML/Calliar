@@ -71,7 +71,7 @@ function preprocess(name)
 }
 function addImage(imageName)
 {
-    fabric.Image.fromURL("/static/larger_images/"+imageName, function(img) {
+    fabric.Image.fromURL("/static/images/"+imageName, function(img) {
         img.opacity = 0.5
         img.set({
             left: 0,

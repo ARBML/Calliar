@@ -75,7 +75,7 @@ function preprocess(name)
 
 function addRaster(imageName)
 {
-    var raster = new paper.Raster({source: "/static/larger_images/"+imageName})
+    var raster = new paper.Raster({source: "/static/images/"+imageName})
     
     var w, h;
     raster.onLoad = function ()
