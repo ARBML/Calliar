@@ -11,5 +11,4 @@ venv/*
 !dataset.zip
 !dataset_words.npz
 !dataset_words_str.npz
-#calliar_server/*
 !dataset.npz
