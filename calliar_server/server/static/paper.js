@@ -20,18 +20,6 @@ var paper;
 var strokeWidth = 3;
 var currImageId = 0;
 
-/*
-record the current drawing coordinates
-*/
-function recordCoor(event) {
-    var pointer = canvas.getPointer(event.e);
-    var x = pointer.x;
-    var y = pointer.y;
-    if (x >= 0 && y >= 0 && mousePressed) {
-        currStroke.push([x, y])
-    }
-}
-
 function preprocess(name)
 {
     var text = name;
