@@ -18,6 +18,7 @@ var input;
 var ctr = 0; 
 var paper; 
 var strokeWidth = 3;
+var currImageId = 0;
 
 /*
 record the current drawing coordinates
@@ -113,16 +114,18 @@ load the model
 
 function getImageUrl(){
     var xmlHttp = new XMLHttpRequest();
-    xmlHttp.open( "GET", '/endpoint/next-image', false ); // false for synchronous request
+    xmlHttp.open( "GET", '/endpoint/next-image?id='+currImageId, false ); // false for synchronous request
     xmlHttp.send( null );
     response = JSON.parse(xmlHttp.response)
     numImages = response.num_images
     procNumImages = response.proc_num_images
     document.getElementById("ctr").innerHTML = 'You processed '+ctr+ ', remaining images '+numImages+', total processed images '+procNumImages;
+    currImageId = parseInt(response.id)
     return response.image_path
 }
 
 async function start() {
+
     var slider = document.getElementById('myRange');
     readonlyInput = document.getElementById("text-readonly");
     input = document.getElementById("text");
@@ -155,6 +158,7 @@ async function start() {
         path.add(event.point);
     }
 
+
     tool.onMouseUp = function(event) {            
         // When the mouse is released, simplify it:
         if (path.segments.length > 1)
@@ -170,6 +174,7 @@ async function start() {
             alert("cannot add empty characters!")
         }
         else{
+            console.log('stroke ... ')
             console.log(currStroke)
             currSketch.push({[currChar]:currStroke})
             allPaths.push(path)
@@ -178,7 +183,18 @@ async function start() {
 
         }
 
-}
+    }
+
+    tool.onKeyDown = function(event) { 
+        if(event.key == 'right'){
+            currImageId += 1
+            next()
+        }
+        if (event.key == 'left') {
+            if(currImageId > 0) currImageId -= 1
+            next()
+        }
+    }
 
     // addImage('https://www.namearabic.com/thumbs/Thuluth/Aysha-462-400.jpg')
     oldImageName = getImageUrl()

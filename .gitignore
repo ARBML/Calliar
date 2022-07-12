@@ -12,3 +12,4 @@ venv/*
 !dataset_words.npz
 !dataset_words_str.npz
 !dataset.npz
+*.pyc
