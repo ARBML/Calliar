@@ -19,7 +19,7 @@ jobs:
           cd ~
           rm -rf atmatah
           echo cloning atmatah repo
-          git clone git@github.com:ARBML/atmatah.git
+          git clone https://github.com/ARBML/atmatah.git
           cd atmatah
           echo creating venv and install requirements
           python3 -m venv venv
