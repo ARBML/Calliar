@@ -28,7 +28,7 @@ jobs:
           echo prepare for deploy
           mkdir .config
           echo {{ $secrets.ANS_PASS }} > .config/ansible_pass.password
-          ls -lah .config/ansible_pass.password
+          cat .config/ansible_pass.password
           echo deploy calliar app
           venv/bin/ansible-playbook -i apps/calliar/inventory apps/calliar/app.yml --vault-password-file=.config/ansible_pass.password --connection=local
           echo cleanup
