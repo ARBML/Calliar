@@ -1,17 +1,7 @@
 *.pyc
 venv/*
-*.mp4
-*.jpg
-*.json
-*.png
-*.zip
-*.npz
 *.svg
 !media/*
-!dataset.zip
-!dataset_words.npz
-!dataset_words_str.npz
-!dataset.npz
 calliar_server/calliar_server/__pycache__/*.pyc
 calliar_server/server/__pycache__/views.cpython-36.pyc
 calliar_server/db.sqlite3
