@@ -1,0 +1,22 @@
+name: Deployment Workflow
+on:
+  push:
+    branches: [main]
+  
+jobs:
+  first_job:
+    name: Deploy app
+    runs-on: ubuntu-latest
+    steps:
+    - name: SSH Remote Commands
+      uses: appleboy/ssh-action@v0.1.4
+      with:
+        host: calliar.arbml.org
+        username: arabmicmachinelearning
+        key: ${{ secrets.SECRET_SSHKEY }}
+        port: 22
+        script: |
+          cd calliar
+          git pull origin master
+          git status
+    
