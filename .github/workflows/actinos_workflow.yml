@@ -23,7 +23,7 @@ jobs:
           cd atmatah
           echo creating venv and install requirements
           python3 -m venv venv
-          venv/bin/python -m pip install requirements.txt
+          venv/bin/python -m pip install -r requirements.txt
           echo prepare for deploy
           echo {{ $secrets.ANS_PASS }} > .config/ansible_pass.password
           echo deploy
