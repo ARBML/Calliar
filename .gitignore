@@ -15,3 +15,5 @@ venv/*
 calliar_server/calliar_server/__pycache__/*.pyc
 calliar_server/server/__pycache__/views.cpython-36.pyc
 calliar_server/db.sqlite3
+calliar_server/server/__pycache__/urls.cpython-36.pyc
+calliar_server/server/__pycache__/views.cpython-36.pyc

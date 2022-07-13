@@ -44,7 +44,7 @@ class EndpointView(View):
                     else:
                         ctr = str(int(ctr)+1)
             print(file_name)
-            file_path = f"server/data/{ctr+file_name}.json"
+            file_path = f"server/static/data/{ctr+file_name}.json"
             json.dump(data['sketch'],open(file_path, 'w'))
             result = JsonResponse({'result':True})
         except Exception as e:
@@ -69,5 +69,37 @@ class NextImageView(View):
 
     def get(self, request, *args, **kwargs):
         return HttpResponse(self.get_next_image_name(int(request.GET['id'])))
+
+class ExploreView(View):
+    
+    template_name = 'server/explore.html'
+    def render_to_template(self):
+        # context = {'next_image_name':self.get_next_image_name()}
+        context = {}
+        return render(
+            self.request,
+            self.template_name,
+            context,
+        )
+    
+    def get(self, request, *args, **kwargs):
+        return self.render_to_template()
+        
+class NextJsonView(View):
+    
+    def get_next_json_name(self, curr_id):
+        json_paths = os.listdir('server/static/data/')
+
+        if curr_id >= len(json_paths):
+            curr_id = 0
+        elif curr_id == -1:
+            curr_id = len(json_paths) - 1
+
+        return JsonResponse({'json_path':json_paths[curr_id], 'id':curr_id})
+
+
+    def get(self, request, *args, **kwargs):
+        return HttpResponse(self.get_next_json_name(int(request.GET['id'])))
+
 
 
