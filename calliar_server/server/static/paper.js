@@ -86,6 +86,7 @@ function addRaster(imageName)
     };
 
 }
+
 function addImage(imageName)
 {
     addRaster(imageName)
@@ -98,7 +99,6 @@ function addImage(imageName)
 /*
 load the model
 */
-
 
 function getImageUrl(){
     var xmlHttp = new XMLHttpRequest();
@@ -179,14 +179,13 @@ async function start() {
             next()
         }
         if (event.key == 'left') {
-            if(currImageId > 0) currImageId -= 1
+            currImageId -= 1
             next()
         }
     }
 
     // addImage('https://www.namearabic.com/thumbs/Thuluth/Aysha-462-400.jpg')
-    oldImageName = getImageUrl()
-    addImage(oldImageName)
+    next()
 
     slider.onchange  = function() {
         strokeWidth = parseInt(this.value);

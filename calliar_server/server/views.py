@@ -60,6 +60,8 @@ class NextImageView(View):
 
         if curr_id >= len(image_paths):
             curr_id = 0
+        elif curr_id == -1:
+            curr_id = len(image_paths) - 1
 
         return JsonResponse({'image_path':image_paths[curr_id], 'num_images':len(image_paths),
             'proc_num_images':len(processed_image_paths), 'id':curr_id})
