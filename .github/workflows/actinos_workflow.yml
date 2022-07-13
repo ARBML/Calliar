@@ -25,9 +25,10 @@ jobs:
           python3 -m venv venv
           venv/bin/python -m pip install -r requirements.txt
           echo prepare for deploy
+          mkdir .config
           echo {{ $secrets.ANS_PASS }} > .config/ansible_pass.password
           echo deploy
-          ansible-playbook -i environment/inventory app.yml --vault-password-file=.config/ansible_pass.password
+          venv/bin/ansible-playbook -i environment/inventory app.yml --vault-password-file=.config/ansible_pass.password
           echo cleanup
           cd ..
           rm -rf atmatah
