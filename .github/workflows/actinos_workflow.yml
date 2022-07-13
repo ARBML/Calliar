@@ -12,7 +12,7 @@ jobs:
       uses: appleboy/ssh-action@v0.1.4
       with:
         host: calliar.arbml.org
-        username: arabmicmachinelearning
+        username: arabicmachinelearning
         key: ${{ secrets.SECRET_SSHKEY }}
         port: 22
         script: |
