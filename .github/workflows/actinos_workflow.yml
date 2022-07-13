@@ -16,7 +16,14 @@ jobs:
         key: ${{ secrets.SECRET_SSHKEY }}
         port: 22
         script: |
-          cd calliar
-          git pull origin master
-          git status
+          cd ~
+          rm -rf atmatah
+          git clone git@github.com:ARBML/atmatah.git
+          cd atmatah
+          python3 -m venv venv
+          venv/bin/python -m pip install requirements.txt
+          echo {{ $secrets.ANS_PASS }} > .config/ansible_pass.password
+          ansible-playbook -i environment/inventory app.yml --vault-password-file=.config/ansible_pass.password
+          cd ..
+          rm -rf atmatah
     
