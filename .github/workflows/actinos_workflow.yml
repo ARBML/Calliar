@@ -5,7 +5,7 @@ on:
   
 jobs:
   first_job:
-    name: Deploy app
+    name: Deploy Calliar Website
     runs-on: ubuntu-latest
     steps:
     - name: SSH Remote Commands
@@ -18,12 +18,17 @@ jobs:
         script: |
           cd ~
           rm -rf atmatah
+          echo cloning atmatah repo
           git clone git@github.com:ARBML/atmatah.git
           cd atmatah
+          echo creating venv and install requirements
           python3 -m venv venv
           venv/bin/python -m pip install requirements.txt
+          echo prepare for deploy
           echo {{ $secrets.ANS_PASS }} > .config/ansible_pass.password
+          echo deploy
           ansible-playbook -i environment/inventory app.yml --vault-password-file=.config/ansible_pass.password
+          echo cleanup
           cd ..
           rm -rf atmatah
     
