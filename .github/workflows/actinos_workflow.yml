@@ -24,11 +24,12 @@ jobs:
           echo creating venv and install requirements
           python3 -m venv venv
           venv/bin/python -m pip install -r requirements.txt
+          venv/bin/ansible-galaxy install -r requirements.yml
           echo prepare for deploy
           mkdir .config
           echo {{ $secrets.ANS_PASS }} > .config/ansible_pass.password
           echo deploy
-          venv/bin/ansible-playbook -i environment/inventory apps/calliar/app.yml --vault-password-file=.config/ansible_pass.password
+          venv/bin/ansible-playbook -i apps/calliar/inventory apps/calliar/app.yml --vault-password-file=.config/ansible_pass.password
           echo cleanup
           cd ..
           rm -rf atmatah
