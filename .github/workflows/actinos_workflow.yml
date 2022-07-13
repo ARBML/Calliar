@@ -28,8 +28,9 @@ jobs:
           echo prepare for deploy
           mkdir .config
           echo {{ $secrets.ANS_PASS }} > .config/ansible_pass.password
-          echo deploy
-          venv/bin/ansible-playbook -i apps/calliar/inventory apps/calliar/app.yml --vault-password-file=.config/ansible_pass.password
+          echo {{ $secrets.SECRET_SSHKEY }} > .config/private-key.pem
+          echo deploy calliar app
+          venv/bin/ansible-playbook -i apps/calliar/inventory apps/calliar/app.yml --vault-password-file=.config/ansible_pass.password --private-key=.config/private-key.pem
           echo cleanup
           cd ..
           rm -rf atmatah
