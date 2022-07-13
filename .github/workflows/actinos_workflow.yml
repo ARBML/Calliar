@@ -28,7 +28,7 @@ jobs:
           mkdir .config
           echo {{ $secrets.ANS_PASS }} > .config/ansible_pass.password
           echo deploy
-          venv/bin/ansible-playbook -i environment/inventory app.yml --vault-password-file=.config/ansible_pass.password
+          venv/bin/ansible-playbook -i environment/inventory apps/calliar/app.yml --vault-password-file=.config/ansible_pass.password
           echo cleanup
           cd ..
           rm -rf atmatah
