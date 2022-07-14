@@ -62,9 +62,13 @@
     
             <canvas id="myCanvas"  height = "600px"  style="border:1px solid #000000;" resize hidden></canvas>
     
-            <button class = "button button2" id = "generate">
-                re-animate
-            </button>
+            <div class = "row justify-content-center" style="margin-top:3em;">
+              <div class="btn-group">
+                  <button type="button" class="btn btn-outline-primary" onclick ='generatePrev()' >Prev</button>
+                  <button type="button" class="btn btn-outline-primary" id = "generate" onclick ='generate()'>Animate</button>
+                  <button type="button" class="btn btn-outline-primary" onclick ='generateNext()' >Next</button>
+              </div>
+            </div>
             
             <input type="range" id = 'slider' min="1" max="10" value="3">
         </div> 

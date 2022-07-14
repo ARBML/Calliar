@@ -17,7 +17,6 @@ canvas.setViewBox(0,0,w,h);
 
 var animatePath = function(paths) {
     color = colors[randomNumber(0, colors.length)]
-    document.getElementById("generate").disabled = true;
     var line = canvas.path(paths[0]).attr({
         stroke: color,
         'stroke-opacity': 0,
@@ -51,7 +50,7 @@ var animatePath = function(paths) {
             animatePath(paths.slice(1))
             }
             else{
-            document.getElementById("generate").disabled = false;
+                enableBtns()
             drawing = false
             }
             
@@ -72,9 +71,26 @@ function getJsonUrl(){
     currJsonId = parseInt(response.id)
     return response.json_path
 }
+function disableBtns(){
+    $('button').prop('disabled', true);
+}
 
-function next() {
+function enableBtns(){
+    $('button').prop('disabled', false);
+}
+function generateNext(){
+    currJsonId += 1
+    generate()
+}
+
+function generatePrev(){
+    currJsonId -= 1
+    generate()
+}
+
+function generate() {
     canvas.clear();
+    $('button').prop('disabled', true);
     drawing = true
     json_path = getJsonUrl()
 
@@ -94,38 +110,26 @@ async function start() {
     paper.install(window);
     paper.setup('myCanvas');
 
-    btn = document.getElementById("generate")
-    btn.addEventListener("click", function onClick(){
-        next()
-    });
-
     strokeWidth = document.getElementById('slider').value
     canvas.clear();
 
 
     $(document).keydown(function(event) {
         if(event.key == 'ArrowRight' && drawing != true){
-            currJsonId += 1
-            next()
+            
         }
         if (event.key == 'ArrowLeft' && drawing != true) {
             currJsonId -= 1
-            next()
+            generate()
         }
     });
 
-    next()
+    $( "#slider" ).on('change', function move(){
+            strokeWidth = parseInt(this.value);
+     });
 
-    slider.onchange  = function() {
-        strokeWidth = parseInt(this.value);
-    };
+    generate()
 
-    $(input).change(function(e){
-        text = input.value.trim()
-        newImageName = text+'.jpg'
-        text = preprocess(text)[1]
-        readonlyInput.value  = text;
-    })
-
+    
     
 };
