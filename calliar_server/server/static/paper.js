@@ -119,9 +119,7 @@ async function start() {
     input = document.getElementById("text");
     paper.install(window);
     paper.setup('canvas');
-    paper.Raster.prototype.rescale = function(width, height) {
-        this.scale(width / this.width, height / this.height);
-    }
+
     // Create a simple drawing tool:
     var tool = new Tool();
     var path;

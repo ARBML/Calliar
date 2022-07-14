@@ -3,6 +3,7 @@ variables
 */
 var canvas;
 var paper; 
+var curr_img;
 var strokeWidth = 3;
 var currJsonId = 0;
 var index = 0 ;
@@ -88,11 +89,64 @@ function generatePrev(){
     generate()
 }
 
+function setImage(w, h){
+    console.log(w)
+    console.log(h)
+
+    const scale = 600;
+    if (w > h){
+        h = parseInt((h/w) * scale);
+        w = scale;
+    }else{
+        w = parseInt((w/h) * scale);
+        h = scale; 
+    }
+
+    cx = 300
+    cy = 300 
+
+    canvas.image("/static/processed_images/"+imageName, cx - w/2, cy - h/2, w, h).attr({
+        opacity: .3,
+    });
+}
+function addRaster(imageName)
+{
+    image_url = "/static/processed_images/"+imageName;
+    const img = new Image();
+    img.src = image_url
+    img.onload = function() { setImage(this.width, this.height); }
+    
+
+    // var w, h;
+    // raster.onLoad = function ()
+    // {
+    //     console.log('loaded')
+    //     raster.opacity = 0.3
+    //     h = raster.width;
+    //     w = raster.height;
+
+    //     const scale = 600;
+    //     if (w > h){
+    //         h = parseInt((h/w) * scale);
+    //         w = scale;
+    //     }else{
+    //         w = parseInt((w/h) * scale);
+    //         h = scale; 
+    //     }
+    //     raster.fitBounds(paper.view.bounds)
+    //     console.log(raster.image)
+    //     curr_img = raster.image
+    // };
+
+}
+
 function generate() {
     canvas.clear();
     $('button').prop('disabled', true);
     drawing = true
     json_path = getJsonUrl()
+    imageName = json_path.split('.json')[0]+'.jpg' 
+    addRaster(imageName)
 
     $.getJSON('/static/data/'+json_path , function(data) {
         paths = []
@@ -109,7 +163,9 @@ async function start() {
 
     paper.install(window);
     paper.setup('myCanvas');
-
+    paper.Raster.prototype.rescale = function(width, height) {
+        this.scale(width / this.width, height / this.height);
+    }
     strokeWidth = document.getElementById('slider').value
     canvas.clear();
 
