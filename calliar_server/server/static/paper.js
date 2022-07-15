@@ -173,12 +173,10 @@ async function start() {
 
     tool.onKeyDown = function(event) { 
         if(event.key == 'right'){
-            currImageId += 1
-            next()
+            getNext()
         }
         if (event.key == 'left') {
-            currImageId -= 1
-            next()
+            getPrev()
         }
     }
 
@@ -264,4 +262,14 @@ clear the canvs
 function erase() {
     clearCanvas();
     addRaster(oldImageName);
+}
+
+function getNext(){
+    currImageId += 1
+    next()
+}
+
+function getPrev(){
+    currImageId -= 1
+    next()
 }
