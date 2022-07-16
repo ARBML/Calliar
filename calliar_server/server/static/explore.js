@@ -13,7 +13,8 @@ var w = 600;
 var h = 600;
 var drawing = false;
 
-
+var canvas = Raphael('canvas', '600px', '600px');
+canvas.setViewBox(0,0,w,h);
 
 var animatePath = function(paths) {
     color = colors[randomNumber(0, colors.length)]
@@ -63,7 +64,20 @@ function randomNumber(min, max) {
   return Math.floor(Math.random() * (max - min) + min);
 }
 
-function getJsonUrl(){
+function getJsonList(){
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.open( "GET", '/explore/list-json?', false ); // false for synchronous request
+    xmlHttp.send( null );
+    response = JSON.parse(xmlHttp.response)
+    return response.json_names
+}
+
+function getJsonUrl(id = undefined){
+
+    if(id){
+        currJsonId = id
+    }
+
     var xmlHttp = new XMLHttpRequest();
     xmlHttp.open( "GET", '/explore/next-json?id='+currJsonId, false ); // false for synchronous request
     xmlHttp.send( null );
@@ -89,9 +103,6 @@ function generatePrev(){
 }
 
 function setImage(w, h){
-    console.log(w)
-    console.log(h)
-
     const scale = 600;
     if (w > h){
         h = parseInt((h/w) * scale);
@@ -116,11 +127,12 @@ function addRaster(imageName)
     img.onload = function() { setImage(this.width, this.height); }
 }
 
-function generate() {
+function generate(id = undefined) {
+
     canvas.clear();
     $('button').prop('disabled', true);
     drawing = true
-    json_path = getJsonUrl()
+    json_path = getJsonUrl(id = id)
     imageName = json_path.split('.json')[0]+'.jpg' 
     addRaster(imageName)
 
@@ -137,27 +149,31 @@ function generate() {
 
 async function start() {
 
-    
+    generate()
 
+};
+
+
+function onClick(id){
+    generate(id)
+}
+function createBtn(content, id = 0){
+    return `<button id = ${id} type="button" class="btn btn-light" onclick="onClick(this.id)">${content}</span>`
+}
+
+window.onload = (event) => {
     strokeWidth = document.getElementById('slider').value
     canvas.clear();
-
-
-    $(document).keydown(function(event) {
-        if(event.key == 'ArrowRight' && drawing != true){
-            currJsonId += 1
-            generate()
-        }
-        if (event.key == 'ArrowLeft' && drawing != true) {
-            currJsonId -= 1
-            generate()
-        }
-    });
 
     $( "#slider" ).on('change', function move(){
             strokeWidth = parseInt(this.value);
      });
 
-    generate()
+    console.log('page is fully loaded');
+    const jsonList = getJsonList()
+
+    for (var i=0; i<jsonList.length; i++) {
+        document.querySelector('#jsonList').innerHTML += createBtn(jsonList[i], id = i)
+    }
 
 };

@@ -62,7 +62,8 @@ class NextImageView(View):
             curr_id = 0
         elif curr_id == -1:
             curr_id = len(image_paths) - 1
-
+        
+        print('image path ', image_paths[curr_id])
         return JsonResponse({'image_path':image_paths[curr_id], 'num_images':len(image_paths),
             'proc_num_images':len(processed_image_paths), 'id':curr_id})
 
@@ -100,6 +101,18 @@ class NextJsonView(View):
 
     def get(self, request, *args, **kwargs):
         return HttpResponse(self.get_next_json_name(int(request.GET['id'])))
+
+
+class ListJsonView(View):
+    
+    def get_json_list(self):
+        json_paths = os.listdir('server/static/data/')
+        json_names = [json_path.split('.')[0] for json_path in json_paths]
+        return JsonResponse({'json_names':json_names, 'size':len(json_paths)})
+
+
+    def get(self, request, *args, **kwargs):
+        return HttpResponse(self.get_json_list())
 
 
 
