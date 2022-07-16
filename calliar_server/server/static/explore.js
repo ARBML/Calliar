@@ -12,8 +12,7 @@ var colors = ['#7fc97f', '#beaed4', '#fdc086', '#008ecc', '#386cb0', '#f0027f', 
 var w = 600;
 var h = 600;
 var drawing = false;
-var canvas = Raphael('canvas', w+'px', h+'px');
-canvas.setViewBox(0,0,w,h);
+
 
 
 var animatePath = function(paths) {
@@ -115,29 +114,6 @@ function addRaster(imageName)
     const img = new Image();
     img.src = image_url
     img.onload = function() { setImage(this.width, this.height); }
-    
-
-    // var w, h;
-    // raster.onLoad = function ()
-    // {
-    //     console.log('loaded')
-    //     raster.opacity = 0.3
-    //     h = raster.width;
-    //     w = raster.height;
-
-    //     const scale = 600;
-    //     if (w > h){
-    //         h = parseInt((h/w) * scale);
-    //         w = scale;
-    //     }else{
-    //         w = parseInt((w/h) * scale);
-    //         h = scale; 
-    //     }
-    //     raster.fitBounds(paper.view.bounds)
-    //     console.log(raster.image)
-    //     curr_img = raster.image
-    // };
-
 }
 
 function generate() {
@@ -161,18 +137,16 @@ function generate() {
 
 async function start() {
 
-    paper.install(window);
-    paper.setup('myCanvas');
-    paper.Raster.prototype.rescale = function(width, height) {
-        this.scale(width / this.width, height / this.height);
-    }
+    
+
     strokeWidth = document.getElementById('slider').value
     canvas.clear();
 
 
     $(document).keydown(function(event) {
         if(event.key == 'ArrowRight' && drawing != true){
-            
+            currJsonId += 1
+            generate()
         }
         if (event.key == 'ArrowLeft' && drawing != true) {
             currJsonId -= 1
@@ -186,6 +160,4 @@ async function start() {
 
     generate()
 
-    
-    
 };

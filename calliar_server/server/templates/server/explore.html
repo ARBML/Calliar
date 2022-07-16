@@ -57,11 +57,9 @@
         </p>
     
         <div style = "text-align: center;">
-            <div id="canvas" style = "border-width: thin;border-color: black;border-style:solid"> 
+            <div id="canvas" style = "border-width: thin;border-color: black;border-style:solid; margin: 0 auto; width:600px;"> 
             </div>
-    
-            <canvas id="myCanvas"  height = "600px"  style="border:1px solid #000000;" resize hidden></canvas>
-    
+        
             <div class = "row justify-content-center" style="margin-top:3em;">
               <div class="btn-group">
                   <button type="button" class="btn btn-outline-primary" onclick ='generatePrev()' >Prev</button>
@@ -92,6 +90,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/paper.js/0.11.8/paper-full.min.js"></script>
 
     <script>
-	
+        var canvas = Raphael('canvas', '600px', '600px');
+        canvas.setViewBox(0,0,w,h);
         start()
     </script>
