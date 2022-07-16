@@ -55,8 +55,12 @@
         <p style = "text-align: justify;">
             Explore saved calligraphy as animated strokes.
         </p>
-    
+        <div id = "jsonList">
+        </div>
+        
+        <br>
         <div style = "text-align: center;">
+            
             <div id="canvas" style = "border-width: thin;border-color: black;border-style:solid; margin: 0 auto; width:600px;"> 
             </div>
         
@@ -88,9 +92,3 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/paper.js/0.11.8/paper-full.min.js"></script>
-
-    <script>
-        var canvas = Raphael('canvas', '600px', '600px');
-        canvas.setViewBox(0,0,w,h);
-        start()
-    </script>

@@ -1,4 +1,4 @@
-from .views import EndpointView, NextImageView, ExploreView, NextJsonView
+from .views import EndpointView, NextImageView, ExploreView, NextJsonView, ListJsonView
 from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
@@ -11,6 +11,7 @@ urlpatterns = [
     path('endpoint/next-image/', NextImageView.as_view(),name="next_image"),
     path('explore/', ExploreView.as_view()),
     path('explore/next-json/', NextJsonView.as_view(),name="next_image"),
+    path('explore/list-json/', ListJsonView.as_view(),name="list_jsons"),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
