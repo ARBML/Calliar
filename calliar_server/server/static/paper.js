@@ -221,7 +221,7 @@ function save() {
         return 
     }
     var xhr = new XMLHttpRequest();
-    xhr.open("POST", 'http://127.0.0.1:8000/endpoint/', false);
+    xhr.open("POST", '/endpoint/', false);
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.send(JSON.stringify({
         sketch: currSketch,
