@@ -16,22 +16,12 @@
   <!-- inline stylesheet files into the above <style> element -->
   <link href="https://fonts.googleapis.com/css?family=Montserrat|Segoe+UI" rel="stylesheet"/>
 
-  <!-- bs4 css -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"/>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"  crossorigin="anonymous">
 	
-
-<!-- jQuery library -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
-<!-- Popper JS -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
-
-<!-- Latest compiled JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
-  
-
-
- </head>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+ 
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+</head>
 
  <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -44,20 +34,21 @@
             <li class="nav-item">
               <a class="nav-link" href="../endpoint">Home </a>
             </li>
-            <li class="nav-item active">
-              <a class="nav-link" href="#">Explore <span class="sr-only">(current)</span></a>
+            <li class="nav-item">
+              <a class="nav-link active" href="#">Explore </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="https://arbml.github.io/Calliar/page/index.html" target="_blank">Article <span class="sr-only">(current)</span></a>
+              <a class="nav-link" href="https://arbml.github.io/Calliar/page/index.html" target="_blank">Article </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="https://github.com/ARBML/Calliar" target="_blank">GitHub <span class="sr-only">(current)</span></a>
+              <a class="nav-link" href="https://github.com/ARBML/Calliar" target="_blank">GitHub </a>
             </li>
           </ul>
         </div>
       </nav>
     
-      <div class="container-fluid">
+      <div class="container-sm">
+
         <p style = "text-align: justify;">
             Explore saved calligraphy as animated strokes.
         </p>
@@ -66,17 +57,30 @@
 
         <br>
         <div style = "text-align: center;">
-            
+            <input type="text" class = "form-control" id="text-readonly" value=""  dir="rtl" readonly> 
+            <br>
+
             <div id="canvas" style = "border-width: thin;border-color: black;border-style:solid; margin: 0 auto; width:600px;"> 
             </div>
-        
-            <div class = "row justify-content-center" style="margin-top:3em;">
-              <div class="btn-group">
-                  <button type="button" class="btn btn-outline-primary" onclick ='generatePrev()' >Prev</button>
-                  <button type="button" class="btn btn-outline-primary" id = "generate" onclick ='generate()'>Animate</button>
-                  <button type="button" class="btn btn-outline-primary" onclick ='generateNext()' >Next</button>
+            
+            <br>
+
+
+              <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+                <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off">
+                <label class="btn btn-outline-secondary" for="btnradio1" onclick ='speedUp()' >2x</label>
+              
+                <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off" checked>
+                <label class="btn btn-outline-secondary" for="btnradio2" onclick ='speedReset()'>x</label>
+              
+                <input type="radio" class="btn-check" name="btnradio" id="btnradio3" autocomplete="off">
+                <label class="btn btn-outline-secondary" for="btnradio3" onclick ='speedDown()'>0.5x</label>
               </div>
-            </div>
+              <div class="btn-group">
+                  <button type="button" class="btn btn-outline-secondary" onclick ='generatePrev()' >Prev</button>
+                  <button type="button" class="btn btn-outline-secondary" id = "generate" onclick ='generate()'>Animate</button>
+                  <button type="button" class="btn btn-outline-secondary" onclick ='generateNext()' >Next</button>
+              </div>
             
             <input type="range" id = 'slider' min="1" max="10" value="3">
         </div> 
@@ -95,6 +99,6 @@
 
     <!-- main script -->
     <script src="{% static 'explore.js' %}" > </script>
-
+    <script src="{% static 'utils.js' %}" > </script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/paper.js/0.11.8/paper-full.min.js"></script>
