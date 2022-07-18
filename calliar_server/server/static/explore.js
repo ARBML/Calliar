@@ -6,12 +6,15 @@ var paper;
 var curr_img;
 var strokeWidth = 3;
 var currJsonId = 0;
-var index = 0 ;
+var Strokeindex = 0;
 var paths = [];
 var colors = ['#7fc97f', '#beaed4', '#fdc086', '#008ecc', '#386cb0', '#f0027f', '#bf5b16', '#666666']
 var w = 600;
 var h = 600;
 var drawing = false;
+var readonlyInput;
+var speed = 2;
+
 
 var canvas = Raphael('canvas', '600px', '600px');
 canvas.setViewBox(0,0,w,h);
@@ -30,9 +33,10 @@ var animatePath = function(paths) {
     var prev_path;
     $('#'+line.node.id).animate({
         'to': 1}, {
-        duration: parseInt(length*2),
+        duration: parseInt(length*speed),
         step: function(pos, fx) {
             var offset = length * fx.pos;
+            
             var subpath = line.getSubpath(0, offset);
             if (prev_path != null)
             {
@@ -55,7 +59,9 @@ var animatePath = function(paths) {
             drawing = false
             }
             
-            index += 1;
+            Strokeindex += 1;
+            readonlyInput.focus();
+            readonlyInput.setSelectionRange(0, 2*Strokeindex);
         }
     });
 
@@ -130,10 +136,16 @@ function addRaster(imageName)
 function generate(id = undefined) {
 
     canvas.clear();
+    Strokeindex = 0;
+
     $('button').prop('disabled', true);
     drawing = true
     json_path = getJsonUrl(id = id)
-    imageName = json_path.split('.json')[0]+'.jpg' 
+    json_name = json_path.split('.json')[0]
+    text = preprocess(json_name)[1]
+    readonlyInput.value  = text;
+
+    imageName = json_name+'.jpg' 
     addRaster(imageName)
 
     $.getJSON('/static/data/'+json_path , function(data) {
@@ -162,6 +174,7 @@ function createBtn(content, id = 0){
 }
 
 window.onload = (event) => {
+    readonlyInput = document.getElementById("text-readonly");
     strokeWidth = document.getElementById('slider').value
     canvas.clear();
 
@@ -177,3 +190,15 @@ window.onload = (event) => {
     }
 
 };
+
+function speedUp(){
+    speed = 1 
+}
+
+function speedDown(){
+    speed = 4
+}
+
+function speedReset(){
+    speed = 2
+}
