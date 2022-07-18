@@ -20,9 +20,11 @@ jobs:
 
           if [ ! -d "atmatah" ];
             then
+              echo cloning atamatah as it does not exist
               git clone https://github.com/ARBML/atmatah.git
               cd atmatah
             else
+              echo pulling latest changes from atmatah
               cd atmatah
               git pull
           fi
@@ -41,7 +43,7 @@ jobs:
 
           echo deploy calliar app
           venv/bin/ansible-playbook -i apps/calliar/inventory apps/calliar/app.yml --vault-password-file=.config/ansible_pass.password --connection=local
-          
+
           echo cleanup
           cd ~
     
