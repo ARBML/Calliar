@@ -91,12 +91,14 @@ function getJsonUrl(id = undefined){
     currJsonId = parseInt(response.id)
     return response.json_path
 }
-function disableBtns(){
+function disableBtns(){  
     $('button').prop('disabled', true);
+    $(':radio').prop('disabled', true);
 }
 
 function enableBtns(){
     $('button').prop('disabled', false);
+    $(':radio').prop('disabled', false);
 }
 function generateNext(){
     currJsonId += 1
@@ -138,7 +140,7 @@ function generate(id = undefined) {
     canvas.clear();
     Strokeindex = 0;
 
-    $('button').prop('disabled', true);
+    disableBtns()
     drawing = true
     json_path = getJsonUrl(id = id)
     json_name = json_path.split('.json')[0]
