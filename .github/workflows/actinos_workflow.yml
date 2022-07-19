@@ -17,20 +17,33 @@ jobs:
         port: 22
         script: |
           cd ~
-          rm -rf atmatah
-          echo cloning atmatah repo
-          git clone https://github.com/ARBML/atmatah.git
-          cd atmatah
-          echo creating venv and install requirements
-          python3 -m venv venv
-          venv/bin/python -m pip install -r requirements.txt
+
+          if [ ! -d "atmatah" ];
+            then
+              echo cloning atamatah as it does not exist
+              git clone https://github.com/ARBML/atmatah.git
+              cd atmatah
+            else
+              echo pulling latest changes from atmatah
+              cd atmatah
+              git pull
+          fi
+
+          echo creating venv if not exist and install requirements
+          if [ ! -d "venv" ];
+            then
+              python3 -m venv venv
+          fi
+          venv/bin/python3 -m pip install -r requirements.txt
           venv/bin/ansible-galaxy install -r requirements.yml
+
           echo prepare for deploy
-          mkdir .config
+          mkdir -p .config
           echo ${{ secrets.ANS_PASS }} > .config/ansible_pass.password
+
           echo deploy calliar app
           venv/bin/ansible-playbook -i apps/calliar/inventory apps/calliar/app.yml --vault-password-file=.config/ansible_pass.password --connection=local
+
           echo cleanup
-          cd ..
-          rm -rf atmatah
+          cd ~
     
