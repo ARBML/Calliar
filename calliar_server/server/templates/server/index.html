@@ -17,7 +17,9 @@
 <!-- Latest compiled JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
 
-	
+
+<script src="{% static 'utils.js' %}"></script>
+
 <!-- canvas script -->
 <script src="{% static 'fabric.js' %}"></script>
 
@@ -54,32 +56,33 @@
 
   <div class="container-fluid">
         <span class="badge" id = 'ctr'>0</span>
-        <div class = "row justify-content-center m-2" style="margin-top:3em;">
+        <div class = "row justify-content-center">
           <div class = "col-10">
             <input type="text" class = "form-control" id="text-readonly" value=""  dir="rtl" readonly> 
           </div>
-        </div>
-        <div class = "row justify-content-center m-2">
           <div class = "col-10">
             <input type="text" class = "form-control" id="text" value=""  dir="rtl"> 
           </div>
-        </div>
-        <div class = "row justify-content-center">
           <canvas id="canvas" width="600" height="600" class="canvas" style="border:1px solid #b9bfc9;margin-top:25px;"></canvas>
         </div>
 
-        <div class = "row justify-content-center" style="margin-top:3em;">
+        <div>
+          
+        </div>
+
+        <div class = "row justify-content-center">
+            <div class="col-xs-2">
+              <input type="file" accept="image/*" onchange="loadImage(event)"> 
+            </div>
+
             <div class="btn-group">
               <button type="button" class="btn btn-outline-primary" onclick ='getPrev()' >Prev</button>
               <button type="button" class="btn btn-outline-primary" onclick ='save()' >Save</button>
               <button type="button" class="btn btn-outline-primary" onclick ='getNext()' >Next</button>
               <button type="button" class="btn btn-outline-primary" onclick ='undo()' >Undo</button>
               <button type="button" class="btn btn-outline-primary" onclick ='erase()'>Clear</button>
-
+              <input type="range" min="1" max="10" value="3" class="form-range" id="myRange"> 
           </div>
-        </div>
-        <div class = "row justify-content-center" style="margin-top:3em;">
-          <input type="range" min="1" max="10" value="3" class="form-range" id="myRange"> 
         </div>
   </div>
 </body>

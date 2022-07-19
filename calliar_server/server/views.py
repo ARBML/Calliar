@@ -11,6 +11,11 @@ from django.http import JsonResponse
 import json
 import shutil
 import re 
+import base64
+import io
+from PIL import Image
+
+
 
 @method_decorator(csrf_exempt, name='dispatch')
 class EndpointView(View):
@@ -27,29 +32,34 @@ class EndpointView(View):
     
     def get(self, request, *args, **kwargs):
         return self.render_to_template()
-        
+
+    def save_image(self, data, save_path):
+        b = data.encode()
+        z = b[b.find(b'/9'):]
+        Image.open(io.BytesIO(base64.b64decode(z))).save(save_path)
+           
     def post(self, request, *args, **kwargs):
-        try:
-            data = json.loads(request.body)
-            file_name = data['newImageName'].split('.')[0]
-            ctr = '' 
-            while True:
-                if ctr+file_name+'.jpg' not in os.listdir('server/static/processed_images'):
+        data = json.loads(request.body)
+        file_name = data['newImageName'].split('.')[0]
+        existOnServer = bool(data['existOnServer'])
+        ctr = '' 
+        while True:
+            if ctr+file_name+'.jpg' not in os.listdir('server/static/processed_images'):
+                if existOnServer:
                     shutil.move(f"server/static/images/{data['oldImageName']}",
                                 f"server/static/processed_images/{ctr+file_name}.jpg")
-                    break 
                 else:
-                    if ctr == '':
-                        ctr = '1'
-                    else:
-                        ctr = str(int(ctr)+1)
-            print(file_name)
-            file_path = f"server/static/data/{ctr+file_name}.json"
-            json.dump(data['sketch'],open(file_path, 'w'))
-            result = JsonResponse({'result':True})
-        except Exception as e:
-            print(e)
-            result = JsonResponse({'result':False})
+                    self.save_image(data['imageBlob'], f"server/static/processed_images/{ctr+file_name}.jpg")
+                break 
+            else:
+                if ctr == '':
+                    ctr = '1'
+                else:
+                    ctr = str(int(ctr)+1)
+        
+        file_path = f"server/static/data/{ctr+file_name}.json"
+        json.dump(data['sketch'],open(file_path, 'w'))
+        result = JsonResponse({'result':True})
         return result
 
 class NextImageView(View):

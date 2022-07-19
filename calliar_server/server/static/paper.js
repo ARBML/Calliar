@@ -19,11 +19,11 @@ var ctr = 0;
 var paper; 
 var strokeWidth = 3;
 var currImageId = 0;
+var imageBlob;
+var existOnServer = true;
 
-
-function addRaster(imageName)
-{
-    var raster = new paper.Raster({source: "/static/images/"+imageName})
+function addRasterURL(url){
+    var raster = new paper.Raster({source: url})
     
     var w, h;
     raster.onLoad = function ()
@@ -43,6 +43,10 @@ function addRaster(imageName)
         raster.fitBounds(paper.view.bounds)
         curr_img = raster.image
     };
+}
+function addRaster(imageName)
+{    
+    addRasterURL("/static/images/"+imageName)
 
 }
 
@@ -148,7 +152,7 @@ async function start() {
 
 
 
-    $(input).change(function(e){
+    $('#text').change(function(e){
         text = input.value.trim()
         newImageName = text+'.jpg'
         text = preprocess(text)[1]
@@ -185,7 +189,9 @@ function save() {
     xhr.send(JSON.stringify({
         sketch: currSketch,
         oldImageName:oldImageName,
-        newImageName:newImageName
+        newImageName:newImageName,
+        existOnServer:existOnServer,
+        imageBlob:imageBlob,
     }));
     const response = JSON.parse(xhr.response)
 
@@ -196,7 +202,7 @@ function save() {
         document.getElementById("ctr").innerHTML = 'You processed '+ctr+ ', remaining images '+numImages+', total processed images '+procNumImages;
     }
     else{
-        alert('something is wrong!')
+        alert('server refused to save image')
     }
     currStroke = []
     currSketch = []
@@ -208,7 +214,10 @@ function clearCanvas()
     currStroke = []
     currSketch = []
     allPaths  = []
+    imageBlob = undefined
+    existOnServer = true
 }
+
 function next() {
     clearCanvas();
     oldImageName = getImageUrl()
@@ -216,7 +225,7 @@ function next() {
 }
 
 /*
-clear the canvs 
+clear the canvas 
 */
 function erase() {
     clearCanvas();
@@ -231,4 +240,28 @@ function getNext(){
 function getPrev(){
     currImageId -= 1
     next()
+}
+
+function loadImage(event) {
+    imageName = event.target.files[0]['name']
+    var blob = URL.createObjectURL(event.target.files[0]);
+    clearCanvas();
+    addRasterURL(blob)
+    var reader = new FileReader();
+    reader.readAsDataURL(event.target.files[0]); 
+    reader.onloadend = function() {
+        var base64data = reader.result;
+        imageBlob = base64data
+    }
+    existOnServer = false
+
+    var text =((imageName).split('.')[0]).trim()
+    newImageName = text+'.jpg'
+    input.value  = text;
+    text = preprocess(text)[1]
+    readonlyInput.value  = text;
+}
+function clearImage() {
+    document.getElementById('formFile').value = null;
+    frame.src = "";
 }
