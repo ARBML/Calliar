@@ -23,7 +23,15 @@ var currImageId = 0;
 
 function addRaster(imageName)
 {
-    var raster = new paper.Raster({source: "/static/images/"+imageName})
+    if (imageName==undefined){
+        alert('no more images to draw or something went wrong, going to home page')
+        if (window.location.pathname !='/'){
+          window.location='/'
+          window.location.reload()
+        }
+
+    }
+    var raster = new paper.Raster({source: "/media/calliar_images/images/"+imageName})
     
     var w, h;
     raster.onLoad = function ()
