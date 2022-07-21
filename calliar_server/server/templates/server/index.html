@@ -50,34 +50,31 @@
   </nav>
 
   <div class="container-sm">
-        <span class="badge" id = 'ctr'>0</span>
-        <div class = "row justify-content-center">
-          <div class = "col-10">
+
+        <div class = "row-10 justify-content-md-center">
+            <span class="badge" id = 'ctr'>0</span>
             <input type="text" class = "form-control" id="text-readonly" value=""  dir="rtl" readonly> 
-          </div>
-          <div class = "col-10">
             <input type="text" class = "form-control" id="text" value=""  dir="rtl"> 
-          </div>
-          <canvas id="canvas" width="600" height="600" class="canvas" style="border:1px solid #b9bfc9;margin-top:25px;"></canvas>
+            <center>
+              <canvas id="canvas" width="600px" height="600px" style="border:1px solid #b9bfc9;"></canvas>
+            </center>
         </div>
-
-        <div>
-          
-        </div>
-
+                
         <div class = "row justify-content-center">
-            <div class="col-xs-2">
-              <input type="file" accept="image/*" onchange="loadImage(event)"> 
+            <div class="col-3">
+              <input class="form-control" type="file" id="formFile" onchange="loadImage(event)" accept="image/*">
             </div>
-
-            <div class="btn-group">
-              <button type="button" class="btn btn-outline-primary" onclick ='getPrev()' >Prev</button>
-              <button type="button" class="btn btn-outline-primary" onclick ='save()' >Save</button>
-              <button type="button" class="btn btn-outline-primary" onclick ='getNext()' >Next</button>
-              <button type="button" class="btn btn-outline-primary" onclick ='undo()' >Undo</button>
-              <button type="button" class="btn btn-outline-primary" onclick ='erase()'>Clear</button>
-              <input type="range" min="1" max="10" value="3" class="form-range" id="myRange"> 
-          </div>
+            <div class="col-5">
+              <div class="btn-group">
+                <button type="button" class="btn btn-outline-primary" onclick ='getPrev()' >Prev</button>
+                <button type="button" class="btn btn-outline-primary" onclick ='save()' >Save</button>
+                <button type="button" class="btn btn-outline-primary" onclick ='getNext()' >Next</button>
+                <button type="button" class="btn btn-outline-primary" onclick ='undo()' >Undo</button>
+                <button type="button" class="btn btn-outline-primary" onclick ='erase()'>Clear</button>
+                <input type="range" min="1" max="10" value="3" class="form-range" id="myRange"> 
+              </div>
+            </div>
+            
         </div>
   </div>
 </body>
