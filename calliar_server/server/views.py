@@ -33,31 +33,32 @@ class EndpointView(View):
     def get(self, request, *args, **kwargs):
         return self.render_to_template()
 
-    def save_image(self, data, save_path):
-        b = data.encode()
-        z = b[b.find(b'/9'):]
-        Image.open(io.BytesIO(base64.b64decode(z))).save(save_path)
            
     def post(self, request, *args, **kwargs):
         data = json.loads(request.body)
         file_name = data['newImageName'].split('.')[0]
-        existOnServer = bool(data['existOnServer'])
-        ctr = '' 
+        exist_on_Server = bool(data['existOnServer'])
+        new_file_name = ""
+        counter = '' 
         while True:
-            if ctr+file_name+'.jpg' not in os.listdir('server/static/processed_images'):
-                if existOnServer:
+            new_file_name = counter+file_name
+            if new_file_name not in os.listdir('server/static/processed_images'):
+                if exist_on_Server:
                     shutil.move(f"server/static/images/{data['oldImageName']}",
-                                f"server/static/processed_images/{ctr+file_name}.jpg")
+                                f"server/static/processed_images/{new_file_name}.jpg")
                 else:
-                    self.save_image(data['imageBlob'], f"server/static/processed_images/{ctr+file_name}.jpg")
+                    image_bin = data['imageBlob'].encode()
+                    save_path = f"server/static/processed_images/{new_file_name}.jpg"
+                    image_object = Image.open(io.BytesIO(base64.b64decode(image_bin[image_bin.find(b'/9'):])))
+                    image_object.save(save_path)
                 break 
             else:
-                if ctr == '':
-                    ctr = '1'
+                if counter == '':
+                    counter = '1'
                 else:
-                    ctr = str(int(ctr)+1)
+                    counter = str(int(counter)+1)
         
-        file_path = f"server/static/data/{ctr+file_name}.json"
+        file_path = f"server/static/data/{new_file_name}.json"
         json.dump(data['sketch'],open(file_path, 'w'))
         result = JsonResponse({'result':True})
         return result
