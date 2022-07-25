@@ -1,4 +1,8 @@
 cairosvg
 svgwrite
 rdp
-django~=3.2 
+matplotlib
+numpy
+tqdm
+django~=3.2
+backcall==0.2.0
