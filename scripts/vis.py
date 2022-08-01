@@ -1,20 +1,23 @@
-import numpy as np
-import math, json
-from rdp import rdp
-import numpy as np
-import matplotlib.pyplot as plt
-from matplotlib import animation
-from IPython.display import HTML
-import tqdm.notebook as tq
-import pickle
-from collections import defaultdict
-import cairosvg
-from PIL import Image,ImageDraw
 import glob
-import os 
+import json
+import math
+import os
+import pickle
 import re
+from collections import defaultdict
+
+import cairosvg
+import matplotlib.pyplot as plt
+import numpy as np
 import svgwrite
-from chars import map_chars 
+import tqdm.notebook as tq
+from IPython.display import HTML
+from matplotlib import animation
+from PIL import Image, ImageDraw
+from rdp import rdp
+
+from scripts.chars import map_chars
+
 
 def get_bounds(data):
     minx, miny = 600, 600  
