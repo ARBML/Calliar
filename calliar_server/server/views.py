@@ -4,14 +4,11 @@ from django.views.generic import View
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
-import numpy as np
 import os
-from random import shuffle
 from django.http import JsonResponse
 import json
 import shutil
 from django.conf import settings
-import re 
 import base64
 import io
 from PIL import Image
@@ -40,7 +37,7 @@ class EndpointView(View):
         counter = '' 
         while True:
             new_file_name = counter+file_name
-            if new_file_name not in os.listdir(f"{settings.IMAGES_DIR}/processed_images"):
+            if new_file_name not in os.listdir(f'{settings.IMAGES_DIR}/processed_images'):
                 if exist_on_Server:
                     shutil.move(f"{settings.IMAGES_DIR}/images/{data['oldImageName']}",
                                 f"{settings.IMAGES_DIR}/processed_images/{new_file_name}.jpg")

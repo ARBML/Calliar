@@ -125,9 +125,23 @@ CORS_ALLOW_ALL_ORIGINS = True
 MEDIA_ROOT = os.path.join(BASE_DIR, "../media")
 MEDIA_URL = "/media/"
 
-IMAGES_DIR = f'{BASE_DIR}/../media/calliar_images'
+
+#---------------- CUSTOM ENV VARS -------------
+IMAGES_DIR = '../media/calliar_images'
+
 
 try:
     from .local_settings import *
 except Exception as e:
     print('local settings file cannot be imported')
+    
+# create these dirs if they do not exist, 
+
+os.system(f'mkdir -p {IMAGES_DIR}/annotations')
+os.system(f'mkdir -p {IMAGES_DIR}/processed_images')
+
+# assert required directories within IMAGES_DIR exists
+
+assert os.path.isdir(f'{IMAGES_DIR}/annotations'), 'annotations folder does not exist'
+assert os.path.isdir(f'{IMAGES_DIR}/images'), 'images folder does not exist'
+assert os.path.isdir(f'{IMAGES_DIR}/processed_images'), 'processed_images folder does not exist'
