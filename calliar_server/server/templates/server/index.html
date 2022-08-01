@@ -12,11 +12,11 @@
  
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 
+	
+  <!-- canvas script -->
+  <script src="{% static 'utils.js' %}" > </script>
 
-<script src="{% static 'utils.js' %}"></script>
-
-<!-- canvas script -->
-<script src="{% static 'fabric.js' %}"></script>
+  <script src="{% static 'fabric.js' %}"></script>
 
   <script src="{% static 'unicode.js' %}"></script>
 
@@ -50,32 +50,32 @@
   </nav>
 
   <div class="container-sm">
-
-        <div class = "row-10 justify-content-md-center">
-            <span class="badge" id = 'ctr'>0</span>
+        <span class="badge" id = 'ctr'>0</span>
+        <div class = "row justify-content-center m-2" style="margin-top:3em;">
+          <div class = "col-10">
             <input type="text" class = "form-control" id="text-readonly" value=""  dir="rtl" readonly> 
+          </div>
+        </div>
+        <div class = "row justify-content-center m-2">
+          <div class = "col-10">
             <input type="text" class = "form-control" id="text" value=""  dir="rtl"> 
-            <center>
-              <canvas id="canvas" width="600px" height="600px" style="border:1px solid #b9bfc9;"></canvas>
-            </center>
+          </div>
+          <canvas id="canvas" class="canvas" style = "border-width: thin;border-color: black;border-style:solid; margin: 0 auto; width:600px; height: 600px;"></canvas>
+          <br>
+          <div class="btn-group">
+            <button type="button" class="btn btn-outline-secondary" onclick ='getPrev()' >Prev</button>
+            <button type="button" class="btn btn-outline-secondary" onclick ='save()' >Save</button>
+            <button type="button" class="btn btn-outline-secondary" onclick ='getNext()' >Next</button>
+            <button type="button" class="btn btn-outline-secondary" onclick ='undo()' >Undo</button>
+            <button type="button" class="btn btn-outline-secondary" onclick ='erase()'>Clear</button>
+            <br>
+        </div> 
+        <input type="range" min="1" max="5" value="3" class="form-range" id="myRange">
+
         </div>
-                
-        <div class = "row justify-content-center">
-            <div class="col-3">
-              <input class="form-control" type="file" id="formFile" onchange="loadImage(event)" accept="image/*">
-            </div>
-            <div class="col-5">
-              <div class="btn-group">
-                <button type="button" class="btn btn-outline-primary" onclick ='getPrev()' >Prev</button>
-                <button type="button" class="btn btn-outline-primary" onclick ='save()' >Save</button>
-                <button type="button" class="btn btn-outline-primary" onclick ='getNext()' >Next</button>
-                <button type="button" class="btn btn-outline-primary" onclick ='undo()' >Undo</button>
-                <button type="button" class="btn btn-outline-primary" onclick ='erase()'>Clear</button>
-                <input type="range" min="1" max="10" value="3" class="form-range" id="myRange"> 
-              </div>
-            </div>
-            
-        </div>
+          
+
+             
   </div>
 </body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/paper.js/0.11.5/paper-core.js"></script> 
