@@ -23,8 +23,17 @@ var imageBlob;
 var existOnServer = true;
 
 
-function addRasterURL(url){
-    var raster = new paper.Raster({source: url})
+function addRasterURL(imageName)
+{
+    if (imageName==undefined){
+        alert('no more images to draw or something went wrong, going to home page')
+        if (window.location.pathname !='/'){
+          window.location='/'
+          window.location.reload()
+        }
+
+    }
+    var raster = new paper.Raster({source: "/media/calliar_images/images/"+imageName})
     
     var w, h;
     raster.onLoad = function ()
@@ -44,6 +53,7 @@ function addRasterURL(url){
         raster.fitBounds(paper.view.bounds)
         curr_img = raster.image
     };
+
 }
 
 function addRaster(imageName)
@@ -162,7 +172,7 @@ async function start() {
 
 
 
-    $('#text').change(function(e){
+    $(input).change(function(e){
         text = input.value.trim()
         newImageName = text+'.jpg'
         text = preprocess(text)[1]
@@ -227,7 +237,6 @@ function clearCanvas()
     imageBlob = undefined
     existOnServer = true
 }
-
 function next() {
     clearCanvas();
     oldImageName = getImageUrl()

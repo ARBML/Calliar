@@ -4,18 +4,14 @@ from django.views.generic import View
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
-import numpy as np
 import os
-from random import shuffle
 from django.http import JsonResponse
 import json
 import shutil
 from django.conf import settings
-import re 
 import base64
 import io
 from PIL import Image
-
 
 @method_decorator(csrf_exempt, name='dispatch')
 class EndpointView(View):
@@ -32,8 +28,7 @@ class EndpointView(View):
     
     def get(self, request, *args, **kwargs):
         return self.render_to_template()
-
-           
+        
     def post(self, request, *args, **kwargs):
         data = json.loads(request.body)
         file_name = data['newImageName'].split('.')[0]
@@ -48,7 +43,7 @@ class EndpointView(View):
                                 f"{settings.IMAGES_DIR}/processed_images/{new_file_name}.jpg")
                 else:
                     image_bin = data['imageBlob'].encode()
-                    save_path = f"f'{settings.IMAGES_DIR}/processed_images/{new_file_name}.jpg"
+                    save_path = f"{settings.IMAGES_DIR}/processed_images/{new_file_name}.jpg"
                     image_object = Image.open(io.BytesIO(base64.b64decode(image_bin[image_bin.find(b'/9'):])))
                     image_object.save(save_path)
                 break 
@@ -57,8 +52,8 @@ class EndpointView(View):
                     counter = '1'
                 else:
                     counter = str(int(counter)+1)
-        
-        file_path = f"{settings.IMAGES_DIR}/data/{new_file_name}.json"
+
+        file_path = f"{settings.IMAGES_DIR}/annotations/{new_file_name}.json"
         json.dump(data['sketch'],open(file_path, 'w'))
         result = JsonResponse({'result':True})
         return result
@@ -81,7 +76,6 @@ class NextImageView(View):
         elif curr_id == -1:
             curr_id = len(image_paths) - 1
         
-        print('image path ', image_paths[curr_id])
 
         return JsonResponse({'image_path':image_paths[curr_id], 'num_images':len(image_paths),
             'proc_num_images':len(processed_image_paths), 'id':curr_id})

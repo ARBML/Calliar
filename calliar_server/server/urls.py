@@ -13,5 +13,3 @@ urlpatterns = [
     path('explore/next-json/', NextJsonView.as_view(),name="next_image"),
     path('explore/list-json/', ListJsonView.as_view(),name="list_jsons"),
 ]
-
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
