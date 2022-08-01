@@ -11,6 +11,10 @@ from django.http import JsonResponse
 import json
 import shutil
 from django.conf import settings
+import re 
+import base64
+import io
+from PIL import Image
 
 @method_decorator(csrf_exempt, name='dispatch')
 class EndpointView(View):
@@ -29,27 +33,32 @@ class EndpointView(View):
         return self.render_to_template()
         
     def post(self, request, *args, **kwargs):
-        try:
-            annotation_data = json.loads(request.body)
-            file_name = annotation_data['newImageName'].split('.')[0]
-            ctr = '' 
-            while True:
-                if ctr+file_name+'.jpg' not in os.listdir(f'{settings.IMAGES_DIR}/processed_images'):
-                    shutil.move(f"{settings.IMAGES_DIR}/images/{annotation_data['oldImageName']}",
-                                f"{settings.IMAGES_DIR}/processed_images/{ctr+file_name}.jpg")
-                    break 
+        data = json.loads(request.body)
+        file_name = data['newImageName'].split('.')[0]
+        exist_on_Server = bool(data['existOnServer'])
+        new_file_name = ""
+        counter = '' 
+        while True:
+            new_file_name = counter+file_name
+            if new_file_name not in os.listdir(f"{settings.IMAGES_DIR}/processed_images"):
+                if exist_on_Server:
+                    shutil.move(f"{settings.IMAGES_DIR}/images/{data['oldImageName']}",
+                                f"{settings.IMAGES_DIR}/processed_images/{new_file_name}.jpg")
                 else:
-                    if ctr == '':
-                        ctr = '1'
-                    else:
-                        ctr = str(int(ctr)+1)
-            print(file_name)
-            file_path = f"{settings.IMAGES_DIR}/annotations/{ctr+file_name}.json"
-            json.dump(annotation_data['sketch'],open(file_path, 'w'))
-            result = JsonResponse({'result':True})
-        except Exception as e:
-            print(e)
-            result = JsonResponse({'result':False})
+                    image_bin = data['imageBlob'].encode()
+                    save_path = f"{settings.IMAGES_DIR}/processed_images/{new_file_name}.jpg"
+                    image_object = Image.open(io.BytesIO(base64.b64decode(image_bin[image_bin.find(b'/9'):])))
+                    image_object.save(save_path)
+                break 
+            else:
+                if counter == '':
+                    counter = '1'
+                else:
+                    counter = str(int(counter)+1)
+
+        file_path = f"{settings.IMAGES_DIR}/annotations/{new_file_name}.json"
+        json.dump(data['sketch'],open(file_path, 'w'))
+        result = JsonResponse({'result':True})
         return result
 
 class NextImageView(View):
@@ -70,7 +79,6 @@ class NextImageView(View):
         elif curr_id == -1:
             curr_id = len(image_paths) - 1
         
-        print('image path ', image_paths[curr_id])
 
         return JsonResponse({'image_path':image_paths[curr_id], 'num_images':len(image_paths),
             'proc_num_images':len(processed_image_paths), 'id':curr_id})

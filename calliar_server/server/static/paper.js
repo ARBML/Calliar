@@ -204,7 +204,7 @@ function save() {
         document.getElementById("ctr").innerHTML = 'You processed '+ctr+ ', remaining images '+numImages+', total processed images '+procNumImages;
     }
     else{
-        alert('something is wrong!')
+        alert('server refused to save image')
     }
     currStroke = []
     currSketch = []
@@ -224,7 +224,7 @@ function next() {
 }
 
 /*
-clear the canvs 
+clear the canvas 
 */
 function erase() {
     clearCanvas();
@@ -239,4 +239,28 @@ function getNext(){
 function getPrev(){
     currImageId -= 1
     next()
+}
+
+function loadImage(event) {
+    imageName = event.target.files[0]['name']
+    var blob = URL.createObjectURL(event.target.files[0]);
+    clearCanvas();
+    addRasterURL(blob)
+    var reader = new FileReader();
+    reader.readAsDataURL(event.target.files[0]); 
+    reader.onloadend = function() {
+        var base64data = reader.result;
+        imageBlob = base64data
+    }
+    existOnServer = false
+
+    var text =((imageName).split('.')[0]).trim()
+    newImageName = text+'.jpg'
+    input.value  = text;
+    text = preprocess(text)[1]
+    readonlyInput.value  = text;
+}
+function clearImage() {
+    document.getElementById('formFile').value = null;
+    frame.src = "";
 }
