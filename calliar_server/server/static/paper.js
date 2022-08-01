@@ -19,9 +19,11 @@ var ctr = 0;
 var paper; 
 var strokeWidth = 3;
 var currImageId = 0;
+var imageBlob;
+var existOnServer = true;
 
 
-function addRaster(imageName)
+function addRasterURL(imageName)
 {
     if (imageName==undefined){
         alert('no more images to draw or something went wrong, going to home page')
@@ -51,6 +53,20 @@ function addRaster(imageName)
         raster.fitBounds(paper.view.bounds)
         curr_img = raster.image
     };
+
+}
+
+function addRaster(imageName)
+{    
+    if (imageName==undefined){
+        alert('no more images to draw or something went wrong, going to home page')
+        if (window.location.pathname !='/'){
+          window.location='/'
+          window.location.reload()
+        }
+
+    }
+    addRasterURL("/static/images/"+imageName)
 
 }
 
@@ -193,7 +209,9 @@ function save() {
     xhr.send(JSON.stringify({
         sketch: currSketch,
         oldImageName:oldImageName,
-        newImageName:newImageName
+        newImageName:newImageName,
+        existOnServer:existOnServer,
+        imageBlob:imageBlob,
     }));
     const response = JSON.parse(xhr.response)
 
@@ -216,6 +234,8 @@ function clearCanvas()
     currStroke = []
     currSketch = []
     allPaths  = []
+    imageBlob = undefined
+    existOnServer = true
 }
 function next() {
     clearCanvas();
