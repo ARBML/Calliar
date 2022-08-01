@@ -22,6 +22,7 @@ var currImageId = 0;
 var imageBlob;
 var existOnServer = true;
 
+
 function addRasterURL(url){
     var raster = new paper.Raster({source: url})
     
@@ -44,8 +45,17 @@ function addRasterURL(url){
         curr_img = raster.image
     };
 }
+
 function addRaster(imageName)
 {    
+    if (imageName==undefined){
+        alert('no more images to draw or something went wrong, going to home page')
+        if (window.location.pathname !='/'){
+          window.location='/'
+          window.location.reload()
+        }
+
+    }
     addRasterURL("/static/images/"+imageName)
 
 }

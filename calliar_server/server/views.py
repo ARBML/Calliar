@@ -10,11 +10,11 @@ from random import shuffle
 from django.http import JsonResponse
 import json
 import shutil
+from django.conf import settings
 import re 
 import base64
 import io
 from PIL import Image
-
 
 
 @method_decorator(csrf_exempt, name='dispatch')
@@ -42,13 +42,13 @@ class EndpointView(View):
         counter = '' 
         while True:
             new_file_name = counter+file_name
-            if new_file_name not in os.listdir('server/static/processed_images'):
+            if new_file_name not in os.listdir(f'{settings.IMAGES_DIR}/processed_images'):
                 if exist_on_Server:
-                    shutil.move(f"server/static/images/{data['oldImageName']}",
-                                f"server/static/processed_images/{new_file_name}.jpg")
+                    shutil.move(f"{settings.IMAGES_DIR}/images/{data['oldImageName']}",
+                                f"{settings.IMAGES_DIR}/processed_images/{new_file_name}.jpg")
                 else:
                     image_bin = data['imageBlob'].encode()
-                    save_path = f"server/static/processed_images/{new_file_name}.jpg"
+                    save_path = f"f'{settings.IMAGES_DIR}/processed_images/{new_file_name}.jpg"
                     image_object = Image.open(io.BytesIO(base64.b64decode(image_bin[image_bin.find(b'/9'):])))
                     image_object.save(save_path)
                 break 
@@ -58,7 +58,7 @@ class EndpointView(View):
                 else:
                     counter = str(int(counter)+1)
         
-        file_path = f"server/static/data/{new_file_name}.json"
+        file_path = f"{settings.IMAGES_DIR}/data/{new_file_name}.json"
         json.dump(data['sketch'],open(file_path, 'w'))
         result = JsonResponse({'result':True})
         return result
@@ -66,8 +66,15 @@ class EndpointView(View):
 class NextImageView(View):
     
     def get_next_image_name(self, curr_id):
-        image_paths = os.listdir('server/static/images/')
-        processed_image_paths = os.listdir('server/static/processed_images/')
+        image_paths = os.listdir(f'{settings.IMAGES_DIR}/images/')
+        processed_image_paths = os.listdir(f'{settings.IMAGES_DIR}/processed_images/')
+        
+        if not any ([
+                os.path.isfile(f'{settings.IMAGES_DIR}/images/{file}') 
+                for file in os.listdir(f'{settings.IMAGES_DIR}/images/')
+            ]):
+            return JsonResponse({'result':False,'description':'No more images to return'},status=404)
+                
 
         if curr_id >= len(image_paths):
             curr_id = 0
@@ -75,6 +82,7 @@ class NextImageView(View):
             curr_id = len(image_paths) - 1
         
         print('image path ', image_paths[curr_id])
+
         return JsonResponse({'image_path':image_paths[curr_id], 'num_images':len(image_paths),
             'proc_num_images':len(processed_image_paths), 'id':curr_id})
 
@@ -100,7 +108,7 @@ class ExploreView(View):
 class NextJsonView(View):
     
     def get_next_json_name(self, curr_id):
-        json_paths = os.listdir('server/static/data/')
+        json_paths = os.listdir(f'{settings.IMAGES_DIR}/annotations/')
 
         if curr_id >= len(json_paths):
             curr_id = 0
@@ -117,7 +125,7 @@ class NextJsonView(View):
 class ListJsonView(View):
     
     def get_json_list(self):
-        json_paths = os.listdir('server/static/data/')
+        json_paths = os.listdir(f'{settings.IMAGES_DIR}/annotations/')
         json_names = [json_path.split('.')[0] for json_path in json_paths]
         return JsonResponse({'json_names':json_names, 'size':len(json_paths)})
 
