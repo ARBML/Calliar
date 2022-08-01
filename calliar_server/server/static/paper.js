@@ -28,8 +28,8 @@ function addRasterURL(imageName)
     if (imageName==undefined){
         alert('no more images to draw or something went wrong, going to home page')
         if (window.location.pathname !='/'){
-          window.location='/'
-          window.location.reload()
+          //window.location='/'
+          //window.location.reload()
         }
 
     }
@@ -61,8 +61,8 @@ function addRaster(imageName)
     if (imageName==undefined){
         alert('no more images to draw or something went wrong, going to home page')
         if (window.location.pathname !='/'){
-          window.location='/'
-          window.location.reload()
+          //window.location='/'
+          //window.location.reload()
         }
 
     }
