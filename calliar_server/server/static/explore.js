@@ -123,13 +123,13 @@ function setImage(w, h){
     cx = 300
     cy = 300 
 
-    canvas.image("/static/processed_images/"+imageName, cx - w/2, cy - h/2, w, h).attr({
+    canvas.image("/media/calliar_images/processed_images/"+imageName, cx - w/2, cy - h/2, w, h).attr({
         opacity: .3,
     });
 }
 function addRaster(imageName)
 {
-    image_url = "/static/processed_images/"+imageName;
+    image_url = "/media/calliar_images/processed_images/"+imageName;
     const img = new Image();
     img.src = image_url
     img.onload = function() { setImage(this.width, this.height); }
@@ -150,7 +150,7 @@ function generate(id = undefined) {
     imageName = json_name+'.jpg' 
     addRaster(imageName)
 
-    $.getJSON('/static/data/'+json_path , function(data) {
+    $.getJSON('/media/calliar_images/annotations/'+json_path , function(data) {
         paths = []
         for (var char in data){
             for (var key in data[char]){

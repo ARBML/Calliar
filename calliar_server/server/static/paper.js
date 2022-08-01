@@ -66,7 +66,7 @@ function addRaster(imageName)
         }
 
     }
-    addRasterURL("/static/images/"+imageName)
+    addRasterURL(imageName)
 
 }
 
