@@ -21,11 +21,11 @@ var strokeWidth = 3;
 var currImageId = 0;
 var imageBlob;
 var existOnServer = true;
+var blob;
 
-
-function addRasterURL(imageName)
+function addRaster(url)
 {
-    if (imageName==undefined){
+    if (url==undefined){
         alert('no more images to draw or something went wrong, going to home page')
         if (window.location.pathname !='/'){
           //window.location='/'
@@ -33,7 +33,13 @@ function addRasterURL(imageName)
         }
 
     }
-    var raster = new paper.Raster({source: "/media/calliar_images/images/"+imageName})
+    var raster;
+
+    if (existOnServer){
+        raster = new paper.Raster({source: "/media/calliar_images/images/"+url})
+    }else{
+        raster = new paper.Raster({source: url})
+    }
     
     var w, h;
     raster.onLoad = function ()
@@ -53,20 +59,6 @@ function addRasterURL(imageName)
         raster.fitBounds(paper.view.bounds)
         curr_img = raster.image
     };
-
-}
-
-function addRaster(imageName)
-{    
-    if (imageName==undefined){
-        alert('no more images to draw or something went wrong, going to home page')
-        if (window.location.pathname !='/'){
-          //window.location='/'
-          //window.location.reload()
-        }
-
-    }
-    addRasterURL(imageName)
 
 }
 
@@ -163,7 +155,6 @@ async function start() {
         }
     }
 
-    // addImage('https://www.namearabic.com/thumbs/Thuluth/Aysha-462-400.jpg')
     next()
 
     slider.onchange  = function() {
@@ -234,12 +225,12 @@ function clearCanvas()
     currStroke = []
     currSketch = []
     allPaths  = []
-    imageBlob = undefined
-    existOnServer = true
 }
 function next() {
     clearCanvas();
+    existOnServer = true
     oldImageName = getImageUrl()
+    console.log(oldImageName)
     addImage(oldImageName)
 }
 
@@ -248,7 +239,11 @@ clear the canvas
 */
 function erase() {
     clearCanvas();
-    addRaster(oldImageName);
+    if(existOnServer)
+        addRaster(oldImageName);
+    else
+        addRaster(blob)
+
 }
 
 function getNext(){
@@ -263,16 +258,16 @@ function getPrev(){
 
 function loadImage(event) {
     imageName = event.target.files[0]['name']
-    var blob = URL.createObjectURL(event.target.files[0]);
+    blob = URL.createObjectURL(event.target.files[0]);
     clearCanvas();
-    addRasterURL(blob)
+    existOnServer = false
+    addRaster(blob)
     var reader = new FileReader();
     reader.readAsDataURL(event.target.files[0]); 
     reader.onloadend = function() {
         var base64data = reader.result;
         imageBlob = base64data
     }
-    existOnServer = false
 
     var text =((imageName).split('.')[0]).trim()
     newImageName = text+'.jpg'
