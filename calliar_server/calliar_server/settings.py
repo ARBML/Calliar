@@ -138,10 +138,10 @@ except Exception as e:
 # create these dirs if they do not exist, 
 
 os.system(f'mkdir -p {IMAGES_DIR}/annotations')
-os.system(f'mkdir -p {IMAGES_DIR}/processed_images')
+os.system(f'mkdir -p {IMAGES_DIR}/annoated_images')
 
 # assert required directories within IMAGES_DIR exists
 
 assert os.path.isdir(f'{IMAGES_DIR}/annotations'), 'annotations folder does not exist'
 assert os.path.isdir(f'{IMAGES_DIR}/images'), 'images folder does not exist'
-assert os.path.isdir(f'{IMAGES_DIR}/processed_images'), 'processed_images folder does not exist'
+assert os.path.isdir(f'{IMAGES_DIR}/annoated_images'), 'processed_images folder does not exist'

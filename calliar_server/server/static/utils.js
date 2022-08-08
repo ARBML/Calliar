@@ -39,3 +39,13 @@ function preprocess(name)
 
     return [text, outText]
 }
+
+function getPoints(path){
+    var points = []
+    var segments = path.segments
+
+    for(i = 0; i< segments.length; i++){
+        points.push([segments[i].point.x, segments[i].point.y])
+    }
+    return points
+}
