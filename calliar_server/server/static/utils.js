@@ -39,3 +39,9 @@ function preprocess(name)
 
     return [text, outText]
 }
+
+function getPoints(path){
+    var points = []
+    path.segments.forEach(segment => points.push([segment.point.x,segment.point.y]))
+    return points
+}

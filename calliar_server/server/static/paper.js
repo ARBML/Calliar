@@ -7,6 +7,8 @@ var mousePressed = false;
 var curr_img;
 var currStroke = "";
 var currSketch = [];
+var currStrokeSimplified = "";
+
 var allPaths = [];
 const colors = ['black', 'red', 'blue', 'green', 'orange', 'brown', 'purple']
 var oldImageName;
@@ -121,12 +123,21 @@ async function start() {
 
 
     tool.onMouseUp = function(event) {            
-        // When the mouse is released, simplify it:
-        if (path.segments.length > 1)
+        currStroke = getPoints(path)
+        
+        if (path.segments.length > 5){ //only simplify if the length is greater than 5
             path.simplify();
+        }
+        else{
+            //if the length is less add a single point
+            prev_point_index = path.segments.length - 1
+            prev_point = path.segments[prev_point_index].point;
+            path.add(prev_point.add(1))
+        }
+        currStroke = getPoints(path);
             
         path.fullySelected = true;
-        currStroke = path.exportSVG().getAttribute("d")
+        currStrokeSimplified = path.exportSVG().getAttribute("d")
 
         const currChar = readonlyInput.value.charAt(currSketch.length * 2)
         if (currChar == "")
@@ -135,9 +146,7 @@ async function start() {
             alert("cannot add empty characters!")
         }
         else{
-            console.log('stroke ... ')
-            console.log(currStroke)
-            currSketch.push({[currChar]:currStroke})
+            currSketch.push({[currChar]:[currStroke, currStrokeSimplified]})
             allPaths.push(path)
             readonlyInput.focus();
             readonlyInput.setSelectionRange(0, currSketch.length * 2);
@@ -178,6 +187,7 @@ function undo() {
     if (allPaths.length >= 1){
         allPaths[lastStrokeIdx].remove();
         currSketch.splice(-1, 1)
+        currSketch.currStrokeSimplified.splice(-1, 1)
         allPaths.splice(-1, 1)
     }
     // update selection
@@ -217,6 +227,7 @@ function save() {
     }
     currStroke = []
     currSketch = []
+    currStrokeSimplified = []
 }
 
 function clearCanvas()
@@ -224,6 +235,7 @@ function clearCanvas()
     paper.project.activeLayer.removeChildren();
     currStroke = []
     currSketch = []
+    currStrokeSimplified = []
     allPaths  = []
 }
 function next() {

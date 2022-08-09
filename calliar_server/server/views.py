@@ -37,13 +37,13 @@ class EndpointView(View):
         counter = '' 
         while True:
             new_file_name = counter+file_name
-            if new_file_name not in os.listdir(f'{settings.IMAGES_DIR}/processed_images'):
+            if new_file_name not in os.listdir(f'{settings.IMAGES_DIR}/annotated_images'):
                 if exist_on_Server:
                     shutil.move(f"{settings.IMAGES_DIR}/images/{data['oldImageName']}",
-                                f"{settings.IMAGES_DIR}/processed_images/{new_file_name}.jpg")
+                                f"{settings.IMAGES_DIR}/annotated_images/{new_file_name}.jpg")
                 else:
                     image_bin = data['imageBlob'].encode()
-                    save_path = f"{settings.IMAGES_DIR}/processed_images/{new_file_name}.jpg"
+                    save_path = f"{settings.IMAGES_DIR}/annotated_images/{new_file_name}.jpg"
                     image_object = Image.open(io.BytesIO(base64.b64decode(image_bin[image_bin.find(b'/9'):])))
                     image_object.save(save_path)
                 break 
@@ -62,7 +62,7 @@ class NextImageView(View):
     
     def get_next_image_name(self, curr_id):
         image_paths = os.listdir(f'{settings.IMAGES_DIR}/images/')
-        processed_image_paths = os.listdir(f'{settings.IMAGES_DIR}/processed_images/')
+        processed_image_paths = os.listdir(f'{settings.IMAGES_DIR}/annotated_images/')
         
         if not any ([
                 os.path.isfile(f'{settings.IMAGES_DIR}/images/{file}') 
