@@ -123,10 +123,18 @@ async function start() {
 
 
     tool.onMouseUp = function(event) {            
-        // When the mouse is released, simplify it:
-        if (path.segments.length > 1)
-            currStroke = getPoints(path)
+        currStroke = getPoints(path)
+        
+        if (path.segments.length > 5){ //only simplify if the length is greater than 5
             path.simplify();
+        }
+        else{
+            //if the length is less add a single point
+            prev_point_index = path.segments.length - 1
+            prev_point = path.segments[prev_point_index].point;
+            path.add(prev_point.add(1))
+        }
+        currStroke = getPoints(path);
             
         path.fullySelected = true;
         currStrokeSimplified = path.exportSVG().getAttribute("d")
